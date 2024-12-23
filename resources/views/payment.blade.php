@@ -168,14 +168,14 @@
                             })
                             .then(response => response.json())
                             .then(data => {
-                                //console.log(data);
-                                if (data.success) {
+                                console.log(data);
+                                //if (data.success) {
                                     //console.log(data.token);
                                     // Redirige a una ruta específica cuando la respuesta sea exitosa
-                                    window.location.href = "{{ route('ConfirmarPedido') }}";
-                                } else {
-                                    window.location.href = "{{ route('ConfirmarPedido') }}";
-                                }
+                                //    window.location.href = "{{ route('ConfirmarPedido') }}";
+                                //} else {
+                                //    window.location.href = "{{ route('ConfirmarPedido') }}";
+                                //}
 
                             })
                             .catch(error => {
@@ -196,5 +196,5 @@
 
         renderCardPaymentBrick(bricksBuilder);
     </script>
-    @vite(['resources/js/payment.js'])
+    
 </x-app-layout>

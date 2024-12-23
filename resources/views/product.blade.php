@@ -216,6 +216,6 @@
         });
     </script>
 
-    @vite(['resources/js/product-price.js'])
+    
 
 </x-app-layout>

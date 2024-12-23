@@ -776,6 +776,5 @@
 
   
 
-    @vite(['resources/js/form-handling.js'])
-
+    
 </x-app-layout>

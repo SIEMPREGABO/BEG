@@ -116,5 +116,5 @@
             @endif
         </div>
     </section>
-    @vite(['resources/js/users.js'])
+    
 </x-app-layout>

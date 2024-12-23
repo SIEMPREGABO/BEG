@@ -18,7 +18,7 @@
     <script src="https://sdk.mercadopago.com/js/v2"></script>
 
     @vite('resources/css/app.css')
-
+    @vite('resources/js/app.js')
 </head>
 
 <body class="leading-normal tracking-normal text-indigo-400 m-6 bg-cover bg-fixed"
@@ -349,7 +349,7 @@
             </div>
         </div>
     </footer>
-    @vite(['resources/js/general.js'])
+    
 
 </body>
 

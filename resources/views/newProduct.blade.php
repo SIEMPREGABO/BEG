@@ -299,5 +299,5 @@
 
 
 
-    @vite(['resources/js/product-new.js'])
+    
 </x-app-layout>

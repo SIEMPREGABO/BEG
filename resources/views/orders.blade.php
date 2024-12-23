@@ -107,5 +107,5 @@
         </div>
     </section>
 
-    @vite(['resources/js/process-cart.js'])
+    
 </x-app-layout>

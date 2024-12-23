@@ -144,5 +144,5 @@
 
         </div>
     </section>
-    @vite(['resources/js/codes.js'])
+   
 </x-app-layout>

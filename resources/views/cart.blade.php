@@ -119,6 +119,6 @@
             @endif
         </div>
     </div>
-    @vite(['resources/js/cart.js'])
+    
 
 </x-app-layout>

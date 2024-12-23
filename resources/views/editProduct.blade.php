@@ -501,5 +501,4 @@
         </div>
     </div>
 
-    @vite(['resources/js/product-edit.js'])
 </x-app-layout>

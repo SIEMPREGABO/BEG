@@ -349,7 +349,7 @@ class CartController extends Controller
         $carrito = Session::get('carrito', []);
         //$address = Session
         if (empty($carrito)) {
-            return redirect()->route('/');
+            return redirect()->route('Home');
         }
 
         MercadoPagoConfig::setAccessToken(config('services.mercadopago.access_token'));
@@ -481,6 +481,7 @@ class CartController extends Controller
         } else {*/
 
         try {
+
             $client = new PaymentClient();
 
             $request_options = new RequestOptions();
@@ -500,9 +501,11 @@ class CartController extends Controller
                 ],
             ];
 
+            $response = $client->create($createRequest, $request_options);
+
+
 
             // Crear el pago
-            $response = $client->create($createRequest, $request_options);
 
             // Comprobar si la respuesta es correcta
             if ($response->status === "approved") {
@@ -540,6 +543,7 @@ class CartController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Error del servidor, inténtelo nuevamente ',
+                
             ], 500);
         }
         //}
@@ -558,7 +562,7 @@ class CartController extends Controller
         //dd($codigo);
 
         if ($payment_id === null) {
-            return redirect()->route('/');
+            return redirect()->route('Home')->withErrors(['Error' => 'Error de mercado']);
         } else {
             if ($payment_status === 'approved') {
                 DB::beginTransaction();

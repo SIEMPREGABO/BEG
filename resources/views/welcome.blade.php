@@ -113,7 +113,5 @@
 
         </div>
     </div>
-
-    @vite('resources/css/slider.css')
-
+    
 </x-app-layout>
