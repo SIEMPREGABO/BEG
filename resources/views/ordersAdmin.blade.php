@@ -105,10 +105,10 @@
                                         <!-- Fila 3 -->
                                         <div class="md:flex w-full md:items-center md:justify-between ">
                                             <div class="flex flex-col md:items-center md:p-0 p-2 w-full">
-                                                <label for="habilitar-{{ $order->id }}"
+                                                <label for="orden-{{ $order->id }}"
                                                     class="mr-2">Estado</label>
-                                                <select id="habilitar-{{ $order->id }}"
-                                                    name="habilitar{{ $order->id }}" onchange="cambiarEstado(this.value, {{ $order->id }})"
+                                                <select id="orden-{{ $order->id }}"
+                                                    name="orden-{{ $order->id }}" onchange="cambiarEstado(this.value, {{ $order->id }})"
                                                     class="rounded-md p-1 border text-black border-gray-300">
                                                     <option value="En revision" @selected($order->state == 'En revision')>En revisión
                                                     </option>
@@ -190,5 +190,4 @@
 
         </div>
     </section>
-    @vite(['resources/js/order.js'])
 </x-app-layout>

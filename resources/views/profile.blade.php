@@ -333,9 +333,9 @@
 
                     <hr class="mb-8 border-t " />
 
-                    <h3 class="py-4 text-2xl text-center text-white dark:text-white uppercase font-bold">mis tarjetas
-                    </h3>
-                    <div class="flex flex-wrap w-full justify-center mb-4">
+                    <!--h3 class="py-4 text-2xl text-center text-white dark:text-white uppercase font-bold">mis tarjetas
+                    </h3-->
+                    <!--div class="flex flex-wrap w-full justify-center mb-4">
                         @forelse($cards as $card)
                             <div class="md:w-1/3 px-3 my-3 w-full">
                                 <div class=" w-full lg:max-w-full lg:flex ">
@@ -388,17 +388,17 @@
                                 registradas
                             </h3>
                         @endforelse
-                    </div>
+                    </div-->
 
-                    <div class="mb-4">
+                    <!--div class="mb-4">
                         <button
                             class=" flex flex-wrap justify-start items-center rounded-full bg-blue-500  border-blue-500  p-2"
                             id="addCardButton">
                             <i class="fa-solid fa-plus p-1"></i>
                             <p>Agregar método de pago x</p>
                         </button>
-                    </div>
-                    <div id="addCard" class="hidden">
+                    </div-->
+                    <!--div id="addCard" class="hidden">
                         <form  class="px-8 pt-6 pb-8 mb-4   rounded"  action="{{ route('GuardarTarjeta') }}" method="POST">
                             @csrf 
                             <div class="mb-4 md:flex md:justify-between ">
@@ -430,7 +430,7 @@
                                         <input
                                             class="w-full px-3 py-2 text-sm   text-black border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                             id="mes" name="mes" type="text" placeholder="11"
-                                            value="{{ old('mes') }}" /><!--min="2024-01" max="2025-12"-->
+                                            value="{{ old('mes') }}" />
                                     </div>
                                     <div class="mb-4 w-1/3 md:mb-0 md:w-2/12  flex items-end justify-center  ">
                                         <p class="pb-4">/</p>
@@ -442,7 +442,7 @@
                                         <input
                                             class="w-full px-3 py-2 text-sm   text-black border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                             id="anio" name="anio" type="text" placeholder="24"
-                                            value="{{ old('anio') }}" /><!--min="2024-01" max="2025-12"-->
+                                            value="{{ old('anio') }}" />
                                     </div>
                                 </div>
                                 <div class="mb-4  w-1/2 ml-2 md:mb-0 md:w-1/4 md:ml-2 ">
@@ -453,7 +453,7 @@
                                         <input
                                             class="w-full px-3 py-2 text-sm   text-black border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                             id="cvv" name="cvv" type="password" placeholder="###"
-                                            /><!--min="2024-01" max="2025-12"-->
+                                            />
                                     </div>
                                 </div>
                             </div>
@@ -468,7 +468,7 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
+                    </div-->
                 </div>
             </div>
 
@@ -477,12 +477,10 @@
         </div>
 
 
-        <div id="edit-card-modal" class="hidden ">
+        <!--div id="edit-card-modal" class="hidden ">
             <div class="fixed inset-0 z-50 flex justify-center items-center w-full h-full bg-black bg-opacity-50">
                 <div class="relative p-4 w-full max-w-md">
-                    <!-- Modal content -->
                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                        <!-- Modal header -->
                         <div
                             class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                             <h3 class="text-xl font-semibold text-gray-900 dark:text-white" id="put">
@@ -513,7 +511,6 @@
                             </div>
                         @endif
 
-                        <!-- Modal body -->
                         <div class="p-4 md:p-5">
                             <form action="{{ route('ActualizarTarjeta') }}" id="edit-card-form" method="POST">
                                 @csrf
@@ -553,7 +550,7 @@
                                             <input
                                                 class="w-full px-3 py-2 text-sm   text-black border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                                 id="mes_edit" name="mes_edit" type="text" placeholder="11"
-                                                value="{{ old('mes_edit') }}" /><!--min="2024-01" max="2025-12"-->
+                                                value="{{ old('mes_edit') }}" />
                                         </div>
                                         <div class="mb-4 w-1/3 md:mb-0 md:w-2/12  flex items-end justify-center  ">
                                             <p class="pb-4">/</p>
@@ -566,7 +563,7 @@
                                             <input
                                                 class="w-full px-3 py-2 text-sm   text-black border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                                 id="anio_edit" name="anio_edit" type="text" placeholder="24"
-                                                value="{{ old('anio_edit') }}" /><!--min="2024-01" max="2025-12"-->
+                                                value="{{ old('anio_edit') }}" />
                                         </div>
                                     </div>
                                     <div class="mb-4  w-1/2 ml-2 md:mb-0 md:w-1/4 md:ml-2 ">
@@ -578,7 +575,7 @@
                                             <input
                                                 class="w-full px-3 py-2 text-sm   text-black border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                                 id="cvv_edit" name="cvv_edit" type="password" placeholder="###"
-                                                /><!--min="2024-01" max="2025-12"-->
+                                                />
                                         </div>
                                     </div>
                                 </div>
@@ -597,7 +594,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div-->
 
         <div id="edit-address-modal" class="hidden ">
             <div class="fixed inset-0 z-50 flex justify-center items-center w-full h-full bg-black bg-opacity-50">

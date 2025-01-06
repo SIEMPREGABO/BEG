@@ -1,6 +1,7 @@
 @section('name', 'Usuarios')
 
 <x-app-layout>
+    @vite('resources/js/app.js')
     <section class=" bg-black bg-opacity-50 my-12 rounded-md  antialiased md:my-16">
         <div class="mx-auto max-w-3xl">
             @if (isset($usuarios))

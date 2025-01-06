@@ -29,7 +29,7 @@ class CatalogosProductos extends Seeder
         // Insertar datos en la tabla categories
         DB::table('categories')->insert([
             ['nombre' => 'Ligas', 'slug' => 'Ligas'],
-            ['nombre' => 'Banqueteria y Máquinas', 'slug' => 'Banqueteria-y-Maquinas'],
+            ['nombre' => 'Banquería y Máquinas', 'slug' => 'Banqueria-y-Maquinas'],
             ['nombre' => 'Funcional CrossFit', 'slug' => 'Funcional-CrossFit'],
             ['nombre' => 'Agarres y Cojines', 'slug' => 'Agarres-y-Cojines'],
             ['nombre' => 'Fitness', 'slug' => 'Fitness'],

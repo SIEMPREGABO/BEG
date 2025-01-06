@@ -21,7 +21,20 @@ function actualizarEstado(selectElement) {
         });
 }
 
-// Añadir evento 'change' a todos los selects que empiezan con "habilitar-"
+function cambiarEstado(estado, id){
+    let url = `/cambiar-estado?estado=${estado}&id=${id}`;
+
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        // Recargar la página al recibir los datos
+        window.location.reload();
+    })
+    .catch( window.location.reload());
+}
+
+
+
 document.querySelectorAll('select[id^="habilitar-"]').forEach(selectElement => {
     selectElement.addEventListener('change', function() {
         actualizarEstado(this);
@@ -31,15 +44,7 @@ document.querySelectorAll('select[id^="habilitar-"]').forEach(selectElement => {
 document.getElementById('open-form-code').addEventListener('click', function () {
     document.getElementById('form-code').classList.toggle('hidden'); // Alterna entre mostrar/ocultar
     document.getElementById('add-code').classList.add('hidden'); // Alterna entre mostrar/ocultar
-
 });
 
-/*
-function mostrarFormularioCodigo() {
-    document.getElementById('addCard').classList.remove('hidden');
-    document.getElementById('addCode').classList.remove('hidden');
-    const radios = document.querySelectorAll('input[name="tarjeta_seleccionada"]');
-    radios.forEach(radio => {
-        radio.checked = false;
-    });
-}*/
+
+window.cambiarEstado = cambiarEstado;

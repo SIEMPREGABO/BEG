@@ -146,6 +146,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/cambiar-estado', [AdminController::class, 'cambiarEstado'])
         ->name('cambiar-estado');
+        
     Route::get('/actualizar-usuario-mayorista', [AdminController::class, 'cambiarEstadoMayorista'])
         ->name('actualizar-usuario-mayorista');
 

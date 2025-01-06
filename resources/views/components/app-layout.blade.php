@@ -30,7 +30,7 @@
             <div class="absolute inset-y-0 left-0 flex items-center md:hidden">
                 <button id="user-movil-button"
                     class="fa fa-bars inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                    aria-hidden="true"></button>
+                    ></button>
             </div>
             <div class="flex-1 flex items-center justify-center md:items-stretch md:justify-start">
                 <div class="flex-shrink-0">
