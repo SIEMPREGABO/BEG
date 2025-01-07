@@ -6,5 +6,5 @@ import './process-cart';
 import './general';
 import './codes';
 //import './users';
-import './product-edit';
-import './product-new';
+//import './product-edit';
+//import './product-new';
