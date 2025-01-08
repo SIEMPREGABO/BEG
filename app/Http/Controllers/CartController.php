@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use MercadoPago\Client\CardToken;
 use MercadoPago\Client\CardToken\CardTokenClient;
 use MercadoPago\MercadoPagoConfig;
@@ -47,6 +48,8 @@ class CartController extends Controller
             'nombre' => $request->nombre,
             'precio' => $request->precio,
             'slug' => $request->slug,
+            'cantidad' => 1,
+            'category' => $request->category,
             'materialEndurance' => $request->materialEndurance,
             'enduranceMaterial' => $request->enduranceMaterial,
             'material' => $request->material,
@@ -56,13 +59,106 @@ class CartController extends Controller
             'length' => $request->length,
             'size' => $request->size,
             'wholesale' => $request->wholesale,
-            'cantidad' => 1,
-            'category' => $request->category,
         ];
-        //dd($producto);
+
+        try {
+            $productoBase = Product::find($request->product);
+        } catch (Exception $e) {
+            dd('aqui');
+            return  redirect()->route('Home')->withErrors(['Carrito' => 'Alerta']);
+        }
+        //dd($productoBase);
+
         $producto = array_filter($producto, function ($value) {
             return $value !== null;
         });
+
+        if ($productoBase->variante) {
+            try {
+                $precioCombinacion = null;
+                //dd($producto);
+                if (isset($producto['materialEndurance']) && isset($producto['enduranceMaterial'])) {
+                    $materialId = $producto['materialEndurance'];
+                    $enduranceId = $producto['enduranceMaterial'];
+                    
+                    $precioCombinacion = DB::table('material_endurance')
+                        ->where('material_id', $materialId)
+                        ->where('endurance_id', $enduranceId)
+                        ->where('product_id',$productoBase->id)
+                        ->value('precio');
+
+                }
+
+                if (isset($producto['material'])) {
+                    $materialId = $producto['material'];
+                    $precioCombinacion = DB::table('material_product')
+                        ->where('material_id', $materialId)
+                        ->where('product_id',$productoBase->id)
+                        ->value('precio');
+                }
+
+                if (isset($producto['lengthWeight']) && isset($producto['weightLength'])) {
+                    $lengthId = $producto['lengthWeight'];
+                    $weightId = $producto['weightLength'];
+                    $precioCombinacion = DB::table('weight_length')
+                        ->where('weight_id', $weightId)
+                        ->where('length_id', $lengthId)
+                        ->where('product_id',$productoBase->id)
+                        ->value('precio');
+                }
+
+                if (isset($producto['weight'])) {
+                    $weightId = $producto['weight'];
+                    $precioCombinacion = DB::table('weight_product')
+                        ->where('weight_id', $weightId)
+                        ->where('product_id',$productoBase->id)
+                        ->value('precio');
+                }
+
+                if (isset($producto['length'])) {
+                    $lengthId = $producto['length'];
+                    $precioCombinacion = DB::table('length_product')
+                        ->where('length_id', $lengthId)
+                        ->where('product_id',$productoBase->id)
+                        ->value('precio');
+                }
+
+                if (isset($producto['size'])) {
+                    $sizeId = $producto['size'];
+                    $precioCombinacion = DB::table('size_product')
+                        ->where('size_id', $sizeId)
+                        ->where('product_id',$productoBase->id)
+                        ->value('precio');
+                }
+
+                if (isset($producto['wholesale'])) {
+                    $wholesaleId = $producto['wholesale'];
+                    $precioCombinacion = DB::table('wholesale_product')
+                        ->where('wholesale_id', $wholesaleId)
+                        ->where('product_id',$productoBase->id)
+                        ->value('precio');
+                }
+                //dd($precioCombinacion);
+                if ((float) $precioCombinacion !== (float) $producto['precio'] || $precioCombinacion === null) {
+                    return  redirect()->route('Home')->withErrors(['Carrito' => 'Alerta']);
+                }
+            } catch (Exception $e) {
+                //dd('error');
+                return  redirect()->route('Home')->withErrors(['Carrito' => 'Alerta']);
+            }
+        } else {
+            if (
+                (float) $productoBase->precio !== (float) $producto['precio']
+                || $productoBase->nombre !== $producto['nombre']
+                || $productoBase->slug !== $producto['slug']
+                || $productoBase->id_category !== $producto['category']
+            ) {
+                return  redirect()->route('Home')->withErrors(['Carrito' => 'Alerta']);
+            }
+        }
+
+        //dd($producto);
+
 
 
 
@@ -172,12 +268,7 @@ class CartController extends Controller
         }
 
 
-        //dd($carrito);
-        //$carrito[] = $producto;
         Session::put('carrito', $carrito);
-        //dd($carrito);
-
-        //return redirect()->route('Carrito');
         return redirect()->back();
     }
 
@@ -543,7 +634,7 @@ class CartController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Error del servidor, inténtelo nuevamente ',
-                
+
             ], 500);
         }
         //}
