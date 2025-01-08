@@ -2,27 +2,25 @@
 <html lang="en">
 
 <head>
+    <title>@yield('name', 'BEG')</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>@yield('name', 'BEG')</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/3c72140922.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
     <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <link href="./output.css" rel="stylesheet">
 
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
+
+    <link rel="preload" href="{{ asset('images/header.webp') }}" as="image">
+
 </head>
 
 <body class="leading-normal tracking-normal text-indigo-400 m-6 bg-cover bg-fixed"
-    style="background-image: url({{ asset('images/header.png') }});">
+    >
 
     <nav class="max-w-7xl mx-auto px-2 md:px-6 lg:px-8 container">
         <!-- PC -->
