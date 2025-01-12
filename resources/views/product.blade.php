@@ -20,9 +20,10 @@
 
             <div class="flex-col md:flex-row justify-center flex gap-4 items-center md:py-32  py-10">
                 <div class="flex rounded-lg flex-col md:flex-row m-5 ">
-                    <div class=" w-full  md:w-1/2 py-5 flex justify-center items-center">
-                        <img src="{{ asset('images/' . $product->slug . '.jpg') }}" class="object-cover w-full h-full ">
+                    <div class=" w-full aspect-square  md:w-1/2 p-5 flex justify-center items-center">
+                        <img src="{{ asset('images/' . $product->slug . '.jpg') }}" class="rounded-lg object-cover w-44 md:w-72 h-44 md:h-72 ">
                     </div>
+                    
                     <form class="flex-auto p-6  md:w-1/2" action="{{ route('agregar-al-carrito') }}" method="post">
                         @csrf
                         <div class="flex flex-wrap">
@@ -37,10 +38,10 @@
                                     @if ($product->variante)
                                         -
                                     @else
-                                        {{ $product->precio }}
+                                        {{ number_format($product->precio, 2) }}
                                     @endif
                                 </p>
-                                <input type="hidden" id="precio" name="precio" value="@if($product->variante)@else{{ $product->precio }}@endif">
+                                <input type="hidden" id="precio" name="precio" value="@if(!$product->variante){{ $product->precio }}@endif">
                             </div>
                         </div>
                         <div class="flex-auto items-center mt-4 mb-6 text-gray-700 dark:text-gray-300">
@@ -210,11 +211,7 @@
     </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            getPrice(); // Llama a la función cuando la página termine de cargarse
-        });
-    </script>
+    
 
     
 

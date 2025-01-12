@@ -67,7 +67,7 @@
                     </span>
                 </div>
                 <div class="mx-auto flex flex-wrap text-xs font-bold text-black uppercase no-underline my-10">
-                    <a class="w-full md:w-1/2 px-5 py-2" href="#">
+                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://www.facebook.com/share/15vYQ1FjNP/">
                         <div class="flex md:justify-end justify-center items-center rounded-lg px-10">
                             <div
                                 class="flex items-center hover:bg-blue-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
@@ -77,7 +77,7 @@
                         </div>
                     </a>
 
-                    <a class="w-full md:w-1/2 px-5 py-2" href="#">
+                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://wa.me/message/H7XD6PXHVY23P1">
                         <div class="flex md:justify-start justify-center items-center rounded-lg px-10">
                             <div
                                 class="flex items-center hover:bg-green-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
@@ -87,7 +87,67 @@
                         </div>
                     </a>
                     <!--<i class="fab fa-whatsapp rounded p-4 fa-10x bg-gradient-to-r hover:text-white from-purple-800 to-blue-600 hover:from-pink-500 hover:to-purple-500 "></i>-->
-                    <a class="w-full md:w-1/2 px-5 py-2" href="#">
+                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://www.facebook.com/share/18ALwbQ51S/?mibextid=qi2Omg">
+                        <div class="flex md:justify-end justify-center items-center rounded-lg px-10">
+                            <div
+                                class="flex items-center hover:bg-blue-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
+                                <i class="fab fa-facebook rounded p-4 fa-10x"></i>
+                                <p class="text-xl">Dany Marci</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://wa.me/message/IXR6FQDPKWYFH1">
+                        <div class="flex md:justify-start justify-center items-center rounded-lg px-10">
+                            <div
+                                class="flex items-center hover:bg-green-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
+                                <i class="fab fa-whatsapp rounded p-4 fa-10x"></i>
+                                <p class="text-xl">Dany Marci</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://www.facebook.com/carla.marci.18?mibextid=ZbWKwL">
+                        <div class="flex md:justify-end justify-center items-center rounded-lg px-10">
+                            <div
+                                class="flex items-center hover:bg-blue-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
+                                <i class="fab fa-facebook rounded p-4 fa-10x"></i>
+                                <p class="text-xl">Carla Marci</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://wa.me/message/VACJ6VYXDKZ4G1">
+                        <div class="flex md:justify-start justify-center items-center rounded-lg px-10">
+                            <div
+                                class="flex items-center hover:bg-green-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
+                                <i class="fab fa-whatsapp rounded p-4 fa-10x"></i>
+                                <p class="text-xl">Carla Marci</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://www.facebook.com/profile.php?id=100011259979300&mibextid=ZbWKwL">
+                        <div class="flex md:justify-end justify-center items-center rounded-lg px-10">
+                            <div
+                                class="flex items-center hover:bg-blue-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
+                                <i class="fab fa-facebook rounded p-4 fa-10x"></i>
+                                <p class="text-lg">Johana Marci</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://wa.me/qr/HABYSTIDJUXIB1">
+                        <div class="flex md:justify-start justify-center items-center rounded-lg px-10">
+                            <div
+                                class="flex items-center hover:bg-green-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
+                                <i class="fab fa-whatsapp rounded p-4 fa-10x"></i>
+                                <p class="text-lg">Johana Marci</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://www.facebook.com/share/1AozV1ivFs/">
                         <div class="flex md:justify-end justify-center items-center rounded-lg px-10">
                             <div
                                 class="flex items-center hover:bg-blue-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
@@ -97,7 +157,7 @@
                         </div>
                     </a>
 
-                    <a class="w-full md:w-1/2 px-5 py-2" href="#">
+                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://wa.me/message/NP4ZDJIR5GZTF1">
                         <div class="flex md:justify-start justify-center items-center rounded-lg px-10">
                             <div
                                 class="flex items-center hover:bg-green-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
@@ -107,22 +167,102 @@
                         </div>
                     </a>
 
-                    <a class="w-full md:w-1/2 px-5 py-2" href="#">
+                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://www.facebook.com/profile.php?id=100053791038783&mibextid=JRoKGi">
                         <div class="flex md:justify-end justify-center items-center rounded-lg px-10">
                             <div
                                 class="flex items-center hover:bg-blue-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
                                 <i class="fab fa-facebook rounded p-4 fa-10x"></i>
-                                <p class="text-xl">Erick Marci</p>
+                                <p class="text-xl">Criss Marci</p>
                             </div>
                         </div>
                     </a>
 
-                    <a class="w-full md:w-1/2 px-5 py-2" href="#">
+                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://wa.me/message/ATTICVC7ADOYK1">
                         <div class="flex md:justify-start justify-center items-center rounded-lg px-10">
                             <div
                                 class="flex items-center hover:bg-green-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
                                 <i class="fab fa-whatsapp rounded p-4 fa-10x"></i>
-                                <p class="text-xl">Erick Marci</p>
+                                <p class="text-xl">Criss Marci</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://www.facebook.com/profile.php?id=100018101074191&mibextid=ZbWKwL">
+                        <div class="flex md:justify-end justify-center items-center rounded-lg px-10">
+                            <div
+                                class="flex items-center hover:bg-blue-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
+                                <i class="fab fa-facebook rounded p-4 fa-10x"></i>
+                                <p class="text-xl">Angel Marci</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://wa.me/message/KYOD7M3EXYOMG1">
+                        <div class="flex md:justify-start justify-center items-center rounded-lg px-10">
+                            <div
+                                class="flex items-center hover:bg-green-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
+                                <i class="fab fa-whatsapp rounded p-4 fa-10x"></i>
+                                <p class="text-xl">Angel Marci</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://www.facebook.com/profile.php?id=100010421532377&mibextid=ZbWKwL">
+                        <div class="flex md:justify-end justify-center items-center rounded-lg px-10">
+                            <div
+                                class="flex items-center hover:bg-blue-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
+                                <i class="fab fa-facebook rounded p-4 fa-10x"></i>
+                                <p class="text-sm">Alejandra Marci</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://wa.me/message/C4K2RIOC2WY7L1">
+                        <div class="flex md:justify-start justify-center items-center rounded-lg px-10">
+                            <div
+                                class="flex items-center hover:bg-green-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
+                                <i class="fab fa-whatsapp rounded p-4 fa-10x"></i>
+                                <p class="text-sm">Alejandra Marci</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://www.facebook.com/share/151n1F7V86/">
+                        <div class="flex md:justify-end justify-center items-center rounded-lg px-10">
+                            <div
+                                class="flex items-center hover:bg-blue-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
+                                <i class="fab fa-facebook rounded p-4 fa-10x"></i>
+                                <p class="text-sm">Elizabeth Marci</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://wa.me/qr/UORU6W2XKJMSH1">
+                        <div class="flex md:justify-start justify-center items-center rounded-lg px-10">
+                            <div
+                                class="flex items-center hover:bg-green-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
+                                <i class="fab fa-whatsapp rounded p-4 fa-10x"></i>
+                                <p class="text-sm">Elizabeth Marci</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://www.facebook.com/luis.marci.9?mibextid=ZbWKwL">
+                        <div class="flex md:justify-end justify-center items-center rounded-lg px-10">
+                            <div
+                                class="flex items-center hover:bg-blue-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
+                                <i class="fab fa-facebook rounded p-4 fa-10x"></i>
+                                <p class="text-xl">Lizza Marci</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://wa.me/message/7PCXD7ZPSHOEN1">
+                        <div class="flex md:justify-start justify-center items-center rounded-lg px-10">
+                            <div
+                                class="flex items-center hover:bg-green-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
+                                <i class="fab fa-whatsapp rounded p-4 fa-10x"></i>
+                                <p class="text-xl">Lizza Marci</p>
                             </div>
                         </div>
                     </a>

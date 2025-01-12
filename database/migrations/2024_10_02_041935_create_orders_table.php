@@ -20,6 +20,8 @@ return new class extends Migration
             $table->foreignId('address_id')->constrained('addresses');
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->foreignId('code_id')->nullable()->constrained('codes')->onDelete('cascade');
+            $table->string('email')->nullable();
+            $table->char('celular',length:10)->nullable();
             $table->timestamps();
         });
     }

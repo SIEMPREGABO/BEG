@@ -13,7 +13,7 @@
                     <dl class="flex items-center justify-between gap-4">
                         <dt class="text-gray-500 dark:text-gray-400">Descuentos</dt>
                         <dd class="text-base font-medium text-green-500">
-                            <p id="descuento" name="descuento">${{ $descuentoTotal }}</p>
+                            <p id="descuento" name="descuento">${{ number_format($descuentoTotal,2) }}</p>
                         </dd>
                     </dl>
 
@@ -23,7 +23,7 @@
 
                     <dl class="flex items-center justify-between gap-4">
                         <dt class="text-gray-500 dark:text-gray-400">Subtotal</dt>
-                        <dd class="text-base font-medium text-gray-500 dark:text-white">${{ $subtotal }}</dd>
+                        <dd class="text-base font-medium text-gray-500 dark:text-white">${{number_format($subtotal,2) }}</dd>
                     </dl>
 
                     <dl
@@ -34,9 +34,9 @@
                         <dt class="text-gray-500 dark:text-gray-400">Envío</dt>
                         <dd class="text-base font-medium text-gray-500 dark:text-white">
                             @if ($envio === 0)
-                                Fuera del radar, nos contactaremos contigo
+                            Tu envío requiere atención especial. Te contactaremos para coordinarlo.
                             @else
-                                ${{ $envio }}
+                                ${{ number_format($envio, 2)  }}
                             @endif
                         </dd>
                     </dl>
@@ -47,7 +47,7 @@
 
                     <dl class="flex items-center justify-between gap-4">
                         <dt class="text-gray-500 dark:text-gray-400">Total</dt>
-                        <dd class="text-base font-medium text-gray-500 dark:text-white">${{ $total }}</dd>
+                        <dd class="text-base font-medium text-gray-500 dark:text-white">${{ number_format($total,2) }}</dd>
                     </dl>
                     <dl
                         class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">

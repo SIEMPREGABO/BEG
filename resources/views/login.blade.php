@@ -22,7 +22,7 @@
     
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
             
-            <div class="bg-gray-900 text-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <div class="bg-gray-900 text-white bg-opacity-50  py-8 px-4 shadow sm:rounded-lg sm:px-10">
                 <div class="sm:mx-auto sm:w-full sm:max-w-md pb-2">
                     <h2 class="mb-2 text-center text-3xl font-extrabold ">
                         Ingresa a tu cuenta
@@ -68,12 +68,12 @@
                         </div>
     
                         
-                        <div class="text-sm">
+                        <!--div class="text-sm">
                             <a class="inline-block text-sm text-blue-500 dark:text-blue-500 align-baseline hover:text-blue-800"
                                 href="#">
                                 ¿Olvidaste tu contraseña?
                             </a>
-                        </div>
+                        </div-->
                     </div>
     
                     <div class="pb-3 w-full flex flex-col items-center">  

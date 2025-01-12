@@ -110,7 +110,7 @@ function cambiarSelect() {
             } else {
                 // Si no hay municipios para el estado seleccionado
                 municipioSelect.length = 1;
-                municipioSelect.options[0] = new Option("-", "0");
+                municipioSelect.options[0] = new Option("-", "");
             }
         })
         .catch(error => console.error('Error al cargar los municipios:', error));
@@ -133,7 +133,7 @@ function cambiarSelectEnvio() {
             } else {
                 // Si no hay municipios para el estado seleccionado
                 municipioSelect.length = 1;
-                municipioSelect.options[0] = new Option("-", "0");
+                municipioSelect.options[0] = new Option("-", "");
             }
         })
         .catch(error => console.error('Error al cargar los municipios:', error));
@@ -155,7 +155,7 @@ function cambiarSelectEdit() {
             } else {
                 // Si no hay municipios para el estado seleccionado
                 municipioSelect.length = 1;
-                municipioSelect.options[0] = new Option("-", "0");
+                municipioSelect.options[0] = new Option("-", "");
             }
         })
         .catch(error => console.error('Error al cargar los municipios:', error));

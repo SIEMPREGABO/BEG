@@ -18,8 +18,8 @@ return new class extends Migration
             $table->unsignedSmallInteger('cp');
             $table->string('colonia');
             $table->string('calle');
-            $table->unsignedSmallInteger('num_ext');
-            $table->unsignedSmallInteger('num_int')->nullable();
+            $table->string('num_ext');
+            $table->string('num_int')->nullable();
         });
     }
 

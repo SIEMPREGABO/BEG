@@ -40,11 +40,6 @@
                     $total = 0; // Variable para almacenar el total
                 @endphp
 
-
-
-
-
-
                 @foreach ($carrito as $index => $product)
                     @php
                         // Calcular el subtotal por producto
@@ -79,8 +74,8 @@
                                     <input type="number" name="productos[{{ $index }}][cantidad]"
                                         id="cantidad-{{ $index }}" value="{{ $product['cantidad'] }}"
                                         class="w-16 text-center bg-black text-white bg-opacity-50 rounded-md"
-                                        min="1" data-index="{{ $index }}"
-                                        data-precio="{{ $product['precio'] }}">
+                                        min="1" max="1000" data-index="{{ $index }}"
+                                       >
                                 </div>
                             </div>
                             <span class="font-bold text-white" id="subtotal-{{ $index }}">$

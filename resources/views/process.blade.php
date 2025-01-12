@@ -99,7 +99,7 @@
                                         class="block w-full px-3 py-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
                                         id="estadoEnvio" name="estadoEnvio" onchange="cambiarSelectEnvio()"
                                         value="{{ old('estadoEnvio') }}">
-                                        <option value="0">Selecciona un estado</option>
+                                        <option value="">Selecciona un estado</option>
                                         <option value="Aguascalientes">Aguascalientes</option>
                                         <option value="Baja California">Baja California</option>
                                         <option value="Baja California Sur">Baja California Sur</option>
@@ -142,7 +142,7 @@
                                     <select
                                         class="block w-full px-3 py-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
                                         id="municipioEnvio" name="municipioEnvio" value="{{ old('municipioEnvio') }}">
-                                        <option value="0">-
+                                        <option value="">-
                                     </select>
                                 </div>
 
@@ -212,7 +212,7 @@
                                         class="block w-full px-3 py-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
                                         id="estadoEnvio" name="estadoEnvio" onchange="cambiarSelectEnvio()"
                                         value="{{ old('estadoEnvio') }}">
-                                        <option value="0">Selecciona un estado</option>
+                                        <option value="">Selecciona un estado</option>
                                         <option value="Aguascalientes">Aguascalientes</option>
                                         <option value="Baja California">Baja California</option>
                                         <option value="Baja California Sur">Baja California Sur</option>
@@ -256,7 +256,7 @@
                                         class="block w-full px-3 py-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"
                                         id="municipioEnvio" name="municipioEnvio"
                                         value="{{ old('municipioEnvio') }}">
-                                        <option value="0">-</option>
+                                        <option value="">-</option>
                                     </select>
                                 </div>
 
@@ -321,9 +321,37 @@
 
 
                 </div>
-                
+
+                @if (!Auth::check())
+                    <div class="mt-6 space-y-4 border-b  border-gray-200 pb-8 dark:border-gray-700 sm:mt-8">
+                        <h4 class="text-lg font-semibold text-gray-500 dark:text-white">Forma de contacto</h4>
+
+                        <div class="mb-6 md:flex md:justify-center">
+                            <div class="mb-4 md:mb-0 md:w-1/2 ">
+                                <label class="block mb-2 text-sm font-bold  dark:text-white" for="emailInvitado">
+                                    Email
+                                </label>
+                                <input
+                                    class="w-full px-3 py-2 text-sm   text-black border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                    id="emailInvitado" name="emailInvitado" type="text" placeholder="Email"
+                                    value="{{ old('emailInvitado') }}" />
+                            </div>
+                            <div class="mb-4 md:mb-0 md:w-1/2 md:ml-2">
+                                <label class="block mb-2 text-sm font-bold  dark:text-white" for="celularInvitado">
+                                    Celular
+                                </label>
+                                <input
+                                    class="w-full px-3 py-2 text-sm   text-black border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                    id="celularInvitado" name="celularInvitado" type="text" placeholder="Celular"
+                                    value="{{ old('celularInvitado') }}" />
+                            </div>
+                        </div>
+                    </div>
+                @endif
 
                 <div class="mt-6 sm:mt-8">
+                    <h4 class="text-xl font-semibold text-gray-500 dark:text-white">Resumen de compra</h4>
+
                     <div class="relative overflow-x-auto border-b border-gray-200 dark:border-gray-800">
 
                         <table class="w-full text-left font-medium text-gray-500 dark:text-white md:table-fixed">
@@ -347,10 +375,11 @@
                                         </td>
 
                                         <td class="p-4 text-base font-normal text-gray-700 dark:text-white">
-                                            x{{ $product['cantidad'] }}</td>
+                                            x{{ $product['cantidad'] }}
+                                        </td>
 
                                         <td class="p-4 text-right text-base font-bold text-gray-700 dark:text-white">
-                                            ${{ $product['precio'] }}
+                                            ${{ number_format($product['precio'], 2) }}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -361,14 +390,13 @@
                     </div>
 
                     <div class="mt-4 space-y-6">
-                        <h4 class="text-xl font-semibold text-gray-500 dark:text-white">Resumen de compra</h4>
 
                         <div class="space-y-4">
                             <div class="space-y-2">
                                 <dl class="flex items-center justify-between gap-4 py-4">
                                     <dt class="text-gray-500 dark:text-gray-400">Precio del carrito</dt>
                                     <dd class="text-base font-medium text-gray-500 dark:text-white">
-                                        ${{ $subtotal }}</dd>
+                                        ${{ number_format($subtotal, 2) }}</dd>
                                 </dl>
 
 
@@ -419,7 +447,7 @@
 
 
                             <dl
-                                class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
+                                class="flex items-center justify-between gap-4  border-gray-200 pt-2 dark:border-gray-700">
                             </dl>
                         </div>
 
@@ -444,5 +472,5 @@
 
 
 
-   
+
 </x-app-layout>

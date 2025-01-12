@@ -94,7 +94,6 @@ class ClientController extends Controller
             return redirect()->route('Home')->withErrors('Correo no verificado');
         }
         
-        
         return redirect()->route('Home')->with('success', 'Correo Verificado');
     }
 
@@ -117,11 +116,6 @@ class ClientController extends Controller
         do {
             $token = Str::random(10);
         } while (User::where('remember_token', $token)->exists());
-
-        /*Mail::raw('Este es un correo de prueba desde Gmail SMTP.', function ($message) use ($cliente) {
-            $message->to($cliente->email)  
-                    ->subject('Bienvenido a beg');
-        });*/
 
         $tokenVerificar = encrypt($cliente->email);
 

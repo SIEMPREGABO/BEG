@@ -64,14 +64,16 @@ class CartController extends Controller
         try {
             $productoBase = Product::find($request->product);
         } catch (Exception $e) {
-            dd('aqui');
+            //dd('aqui');
             return  redirect()->route('Home')->withErrors(['Carrito' => 'Alerta']);
         }
-        //dd($productoBase);
+
 
         $producto = array_filter($producto, function ($value) {
             return $value !== null;
         });
+
+        //dd($producto);
 
         if ($productoBase->variante) {
             try {
@@ -80,20 +82,19 @@ class CartController extends Controller
                 if (isset($producto['materialEndurance']) && isset($producto['enduranceMaterial'])) {
                     $materialId = $producto['materialEndurance'];
                     $enduranceId = $producto['enduranceMaterial'];
-                    
+
                     $precioCombinacion = DB::table('material_endurance')
                         ->where('material_id', $materialId)
                         ->where('endurance_id', $enduranceId)
-                        ->where('product_id',$productoBase->id)
+                        ->where('product_id', $productoBase->id)
                         ->value('precio');
-
                 }
 
                 if (isset($producto['material'])) {
                     $materialId = $producto['material'];
                     $precioCombinacion = DB::table('material_product')
                         ->where('material_id', $materialId)
-                        ->where('product_id',$productoBase->id)
+                        ->where('product_id', $productoBase->id)
                         ->value('precio');
                 }
 
@@ -103,7 +104,7 @@ class CartController extends Controller
                     $precioCombinacion = DB::table('weight_length')
                         ->where('weight_id', $weightId)
                         ->where('length_id', $lengthId)
-                        ->where('product_id',$productoBase->id)
+                        ->where('product_id', $productoBase->id)
                         ->value('precio');
                 }
 
@@ -111,7 +112,7 @@ class CartController extends Controller
                     $weightId = $producto['weight'];
                     $precioCombinacion = DB::table('weight_product')
                         ->where('weight_id', $weightId)
-                        ->where('product_id',$productoBase->id)
+                        ->where('product_id', $productoBase->id)
                         ->value('precio');
                 }
 
@@ -119,7 +120,7 @@ class CartController extends Controller
                     $lengthId = $producto['length'];
                     $precioCombinacion = DB::table('length_product')
                         ->where('length_id', $lengthId)
-                        ->where('product_id',$productoBase->id)
+                        ->where('product_id', $productoBase->id)
                         ->value('precio');
                 }
 
@@ -127,7 +128,7 @@ class CartController extends Controller
                     $sizeId = $producto['size'];
                     $precioCombinacion = DB::table('size_product')
                         ->where('size_id', $sizeId)
-                        ->where('product_id',$productoBase->id)
+                        ->where('product_id', $productoBase->id)
                         ->value('precio');
                 }
 
@@ -135,7 +136,7 @@ class CartController extends Controller
                     $wholesaleId = $producto['wholesale'];
                     $precioCombinacion = DB::table('wholesale_product')
                         ->where('wholesale_id', $wholesaleId)
-                        ->where('product_id',$productoBase->id)
+                        ->where('product_id', $productoBase->id)
                         ->value('precio');
                 }
                 //dd($precioCombinacion);
@@ -151,9 +152,9 @@ class CartController extends Controller
                 (float) $productoBase->precio !== (float) $producto['precio']
                 || $productoBase->nombre !== $producto['nombre']
                 || $productoBase->slug !== $producto['slug']
-                || $productoBase->id_category !== $producto['category']
+                || (float) $productoBase->category_id !== (float) $producto['category']
             ) {
-                return  redirect()->route('Home')->withErrors(['Carrito' => 'Alerta']);
+                return  redirect()->route('Home')->withErrors(['Carrito' => '¡¡Alerta!!']);
             }
         }
 
@@ -356,15 +357,13 @@ class CartController extends Controller
             $cards = $user->cards;
             $addresses = $user->addresses;
 
-
-
             if ($addresses->isNotEmpty()) {
                 $data['addresses'] = $addresses;
             }
 
-            if ($cards->isNotEmpty()) {
-                $data['cards'] = $cards;
-            }
+            // if ($cards->isNotEmpty()) {
+            //    $data['cards'] = $cards;
+            //}
 
 
 
@@ -379,9 +378,9 @@ class CartController extends Controller
     {
 
         $carrito = Session::get('carrito', []);
-
+        dd($request);
         if (empty($carrito)) {
-            return view('cart');
+            return redirect()->route('Home');
         }
 
         $this->getOrCreateAddress($request);
@@ -415,13 +414,16 @@ class CartController extends Controller
 
         $total = $subtotal - $descuentoTotal + $costoTotalEnvio;
 
-        if (Auth::check()) {
-            $user = Auth::user();
-            $cards = $user->cards;
-
-            if ($cards->isNotEmpty()) {
-                $data['cards'] = $cards;
-            }
+        if (!Auth::check()) {
+            $request->validate([
+                'emailInvitado' => 'required|email|regex:/^[\w\.\+-]+@[\w\.-]+\.[a-zA-Z]{2,}$/',
+                'celularInvitado' => 'required|string|min:10|max:10',
+            ], [], [ // Tercer parámetro para atributos personalizados
+                'emailInvitado' => 'email',
+                'celularInvitado' => 'celular',
+            ]);
+            Session::put('emailInvitado', $request->emailInvitado);
+            Session::put('celularInvitado', $request->celularInvitado);
         }
 
         $data['total'] = $total;
@@ -648,9 +650,9 @@ class CartController extends Controller
         $carrito = Session::get('carrito', []);
         $address = Session::get('address');
         $codigo = Session::get('code');
+        
+        
 
-
-        //dd($codigo);
 
         if ($payment_id === null) {
             return redirect()->route('Home')->withErrors(['Error' => 'Error de mercado']);
@@ -658,14 +660,10 @@ class CartController extends Controller
             if ($payment_status === 'approved') {
                 DB::beginTransaction();
                 try {
-
-
                     $subtotal = $this->getSubtotal();
                     $envio = $this->getDelivery();
                     $descuentoTotal = $this->getDescuento($codigo);
                     $descuentoTotal += $this->getDescuentoIVA();
-
-
                     $costoTotalEnvio = $envio['costo_total_envio'];
                     $detallesEnvio = $envio['detalles_envio'];
 
@@ -692,6 +690,8 @@ class CartController extends Controller
                         $order->user_id = Auth::user()->id;
 
                         $email = Auth::user()->email;
+                        $order->email =  Auth::user()->email;
+                        $order->celular = Auth::user()->celular;
                         $mayorista = $this->getMayorista();
                         if ($mayorista) {
                             $user = User::find(Auth::user()->id);
@@ -700,6 +700,10 @@ class CartController extends Controller
                             $user->save();
                         }
                     } else {
+                        $emailInvitado = Session::get('emailInvitado');
+                        $celularInvitado = Session::get('celularInvitado');
+                        $order->email =  $emailInvitado;
+                        $order->celular = $celularInvitado;
                         $email = Session::get('payer_email');
                     }
 
@@ -803,7 +807,8 @@ class CartController extends Controller
                     Session::forget('carrito');
                     Session::forget('address');
                     Session::forget('code');
-
+                    Session::forget('celularInvitado');
+                    Session::forget('emailInvitado');
 
                     // Si todo va bien, hacemos el commit de la transacción
                     DB::commit();
@@ -1000,7 +1005,7 @@ class CartController extends Controller
             $data['proveedor'] = $provider;
             return $data;
         } else {
-            return redirect()->back()->withErrors(['Service' => 'Servicio no disponible']);
+            return redirect()->route('Carrito')->withErrors(['Envío' => 'Servicio de paquetería no disponible']);
         }
     }
 
@@ -1038,13 +1043,21 @@ class CartController extends Controller
             $address = Address::where('id', $request->direccion_seleccionada)->first();
         } else {
             $request->validate([
-                'calle' => 'required|string|max:255',
-                'estadoEnvio' => 'required|string|max:255',
-                'num_ext' => 'required|string|max:5',
-                'num_int' => 'nullable|string|max:5',
-                'municipioEnvio' => 'required|string|max:255',
-                'colonia' => 'required|string|max:255',
+                'calle' => 'required|string|max:100|min:1|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s\.\,\-]+$/',
+                'estadoEnvio' => 'required|string|max:100|min:1',
+                'num_ext' => 'required|string|max:10|min:1|regex:/^[0-9A-Za-z\-\/]+$/',
+                'num_int' => 'nullable|string|max:10|min:1|regex:/^[0-9A-Za-z\-\/]+$/',
+                'municipioEnvio' => 'required|string|max:100|min:1',
+                'colonia' => 'required|string|max:70|min:1|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s\.\,\-]+$/',
                 'cp' => 'required|digits:5',
+            ], [], [ // Tercer parámetro para atributos personalizados
+                'calle' => 'calle',
+                'estadoEnvio' => 'estado',
+                'num_ext' => 'número exterior',
+                'num_int' => 'número interior',
+                'municipioEnvio' => 'municipio',
+                'colonia' => 'colonia',
+                'cp' => 'código postal',
             ]);
             $address = new Address();
             $address->calle = $request->calle;

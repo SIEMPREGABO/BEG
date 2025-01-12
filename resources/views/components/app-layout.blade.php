@@ -10,7 +10,7 @@
     <script src="https://kit.fontawesome.com/3c72140922.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="https://sdk.mercadopago.com/js/v2"></script>
-    <link href="./output.css" rel="stylesheet">
+    <link href="/output.css" rel="stylesheet">
 
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
