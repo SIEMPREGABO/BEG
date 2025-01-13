@@ -28,8 +28,8 @@ class UpdateUserRequest extends FormRequest
             'apellido_paterno' => 'required|string|min:3|max:100|regex:/^[A-Za-zÁÉÍÓÚáéíóú\s]+$/',
             'apellido_materno' => 'required|string|min:3|max:100|regex:/^[A-Za-zÁÉÍÓÚáéíóú\s]+$/',
             'celular' => 'required|string|unique:users,celular,' . Auth::id() . '|min:10|max:10|regex:/^[0-9]+$/',
-            'password' => 'nullable|string|min:8|confirmed|max:24',
-            'current_password' => 'nullable|required_with:password|string',
+            'password' => 'nullable|string|min:8|confirmed|max:24|regex:/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚüÜ!@#$%^&*()_+\-=\[\]{};:",.<>\/?]+$/',
+            'current_password' => 'nullable|required_with:password|min:8|max:24|string|regex:/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚüÜ!@#$%^&*()_+\-=\[\]{};:",.<>\/?]+$/',
         ];
     }
 

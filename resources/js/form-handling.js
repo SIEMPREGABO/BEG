@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function () {
 }¨*/
 
 function openEditModalAddress(addressId, estado, municipio, colonia, cp, calle, num_ext, num_int) {
-    var mis_opts, num_opts;
     const id_input = document.getElementById('address_id_hidden');
     id_input.value = addressId;
     const estado_input = document.getElementById('estado_edit');
@@ -49,17 +48,10 @@ function openEditModalAddress(addressId, estado, municipio, colonia, cp, calle, 
             } else {
                 // Si no hay municipios para el estado seleccionado
                 municipio_input.length = 1;
-                municipio_input.options[0] = new Option("-", "0");
+                municipio_input.options[0] = new Option("-", "");
             }
         })
         .catch(error => console.error('Error al cargar los municipios:', error));
-
-
-    //const municipios = municipiosPorEstado[estado];
-    //municipio_input.length = municipios.length;
-    //municipios.forEach((municipio, index) => {
-    //    municipio_input.options[index] = new Option(municipio, municipio);
-    //});
 
     const colonia_input = document.getElementById('colonia_edit');
     colonia_input.value = colonia;
@@ -74,9 +66,8 @@ function openEditModalAddress(addressId, estado, municipio, colonia, cp, calle, 
     num_ext_input.value = num_ext;
 
     const num_int_input = document.getElementById('num_int_edit');
-    if (num_int !== null) {
-        num_int_input.value = num_int;
-    }
+    num_int_input.value = num_int || "";
+    
     const modal = document.getElementById('edit-address-modal');
     modal.classList.remove('hidden');
 }

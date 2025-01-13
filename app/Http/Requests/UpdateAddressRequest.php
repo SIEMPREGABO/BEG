@@ -22,13 +22,13 @@ class UpdateAddressRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'estado_edit' => 'required|string|max:255',
-            'municipio_edit' => 'required|string|max:255',
+            'estado_edit' => 'required|string|max:100|min:1',
+            'municipio_edit' => 'required|string|max:100|min:1',
             'cp_edit' => 'required|digits:5',
-            'colonia_edit' => 'required|string|max:255',
-            'calle_edit' => 'required|string|max:255',
-            'num_ext_edit' => 'required|string|max:5',
-            'num_int_edit' => 'nullable|string|max:5',
+            'colonia_edit' => 'required|string|max:70|min:1|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s\.\,\-]+$/',
+            'calle_edit' => 'required|string|max:100|min:1|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s\.\,\-]+$/',
+            'num_ext_edit' => 'required|string|max:10|min:1|regex:/^[0-9A-Za-z\-\/]+$/',
+            'num_int_edit' => 'nullable|string|max:10|min:1|regex:/^[0-9A-Za-z\-\/]+$/',
         ];
     }
 
@@ -37,7 +37,7 @@ class UpdateAddressRequest extends FormRequest
         return[
             'estado_edit' => 'estado',
             'municipio_edit' => 'municipio',
-            'cp_edit' => 'cp',
+            'cp_edit' => 'código postal',
             'colonia_edit' => 'colonia',
             'calle_edit' => 'calle',
             'num_ext_edit' => 'número exterior',

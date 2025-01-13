@@ -105,10 +105,10 @@
                                         <!-- Fila 3 -->
                                         <div class="md:flex w-full md:items-center md:justify-between ">
                                             <div class="flex flex-col md:items-center md:p-0 p-2 w-full">
-                                                <label for="orden-{{ $order->id }}"
-                                                    class="mr-2">Estado</label>
+                                                <label for="orden-{{ $order->id }}" class="mr-2">Estado</label>
                                                 <select id="orden-{{ $order->id }}"
-                                                    name="orden-{{ $order->id }}" onchange="cambiarEstado(this.value, {{ $order->id }})"
+                                                    name="orden-{{ $order->id }}"
+                                                    onchange="cambiarEstado(this.value, {{ $order->id }})"
                                                     class="rounded-md p-1 border text-black border-gray-300">
                                                     <option value="En revision" @selected($order->state == 'En revision')>En revisión
                                                     </option>
@@ -123,14 +123,27 @@
                                                 </select>
                                             </div>
 
-
-                                            <div class="flex flex-col md:items-center md:p-0 p-2 w-full ">
-                                                <p>Usuario</p>
-                                                @if ($order->user_id)
-                                                    <p class="text-sm font-extralight"> {{ $order->user->email }}</p>
-                                                @endif
-                                            </div>
-
+                                            @if ($order->user_id)
+                                                <div class="flex flex-col md:items-center md:p-0 p-2 w-full ">
+                                                    <p>Usuario</p>
+                                                    @if ($order->user_id)
+                                                        <p class="text-sm font-extralight"> {{ $order->user->email }}
+                                                        </p>
+                                                        <p class="text-sm font-extralight"> {{ $order->user->celular }}
+                                                        </p>
+                                                    @endif
+                                                </div>
+                                            @else
+                                                <div class="flex flex-col md:items-center md:p-0 p-2 w-full ">
+                                                    <p>Contacto</p>
+                                                    @if ($order->email)
+                                                        <p class="text-sm font-extralight"> {{ $order->email }}</p>
+                                                    @endif
+                                                    @if ($order->celular)
+                                                        <p class="text-sm font-extralight"> {{ $order->celular }}</p>
+                                                    @endif
+                                                </div>
+                                            @endif
 
                                             <div class="flex flex-col md:items-center md:p-0 p-2 w-full">
                                                 <p>Fecha</p>

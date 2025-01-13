@@ -20,6 +20,8 @@ Route::middleware(['auth'])->group(function () {
         ->name('Producto');
     Route::get('/Contacto', [HomeController::class, 'contacto'])
         ->name('Contacto');
+    Route::post('/Contactar', [HomeController::class, 'contactar'])
+        ->name('Contactar');
 
     //Manipular ordenes
     Route::get('/Carrito', [CartController::class, 'mostrarCarrito'])
@@ -146,10 +148,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/cambiar-estado', [AdminController::class, 'cambiarEstado'])
         ->name('cambiar-estado');
-        
+
     Route::get('/actualizar-usuario-mayorista', [AdminController::class, 'cambiarEstadoMayorista'])
         ->name('actualizar-usuario-mayorista');
-
 });
 
 

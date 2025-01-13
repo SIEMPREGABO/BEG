@@ -22,21 +22,26 @@ class SaveAddressRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'calle' => 'required|string|max:255',
-            'colonia' => 'required|string|max:255',
-            'num_ext' => 'required|string|max:5',
-            'num_int' => 'nullable|string|max:5',
-            'municipio' => 'required|string|max:255',
-            'estado' => 'required|string|max:255',
+            'calle' => 'required|string|max:100|min:1|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s\.\,\-]+$/',
+            'colonia' => 'required|string|max:70|min:1|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s\.\,\-]+$/',
+            'num_ext' => 'required|string|max:10|min:1|regex:/^[0-9A-Za-z\-\/]+$/',
+            'num_int' => 'nullable|string|max:10|min:1|regex:/^[0-9A-Za-z\-\/]+$/',
+            'municipio' => 'required|string|max:100|min:1',
+            'estado' => 'required|string|max:100|min:1',
             'cp' => 'required|digits:5',
         ];
     }
 
     public function attributes()
     {
-        return[
+        return [
+            'calle' => 'calle',
+            'estado' => 'estado',
             'num_ext' => 'número exterior',
-            'num_int' => 'número interior'
+            'num_int' => 'número interior',
+            'municipio' => 'municipio',
+            'colonia' => 'colonia',
+            'cp' => 'código postal',
         ];
     }
 }

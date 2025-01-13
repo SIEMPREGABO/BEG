@@ -28,7 +28,8 @@ class RegisterAdminRequest extends FormRequest
             'apellido_materno' => 'required|string|min:3|max:100|regex:/^[A-Za-zÁÉÍÓÚáéíóú\s]+$/',
             'email' => 'required|email|unique:users|regex:/^[\w\.\+-]+@[\w\.-]+\.[a-zA-Z]{2,}$/',
             'celular' => 'required|string|unique:users|min:10|max:10',  //. $clienteId , excluye al editar
-            'password' => 'required|string|min:8|confirmed|max:24',
+            'password' => 'required|string|min:8|confirmed|max:24|regex:/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚüÜ!@#$%^&*()_+\-=\[\]{};:",.<>\/?]+$/',
+            
         ];
     }
 

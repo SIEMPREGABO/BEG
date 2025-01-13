@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Contacto;
 use App\Models\Category;
 use App\Models\Detail;
 use App\Models\Order;
@@ -10,7 +11,9 @@ use App\Models\User;
 use App\Models\Weight;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules\Exists;
+
 
 class HomeController extends Controller
 {
@@ -144,6 +147,32 @@ class HomeController extends Controller
     {
         return view('contact');
     }
+
+    public function contactar(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:100|min:1|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s\.\,\-]+$/',
+            'email' => 'required|email|regex:/^[\w\.\+-]+@[\w\.-]+\.[a-zA-Z]{2,}$/',
+            'phone' => 'required|string|min:10|max:10',
+            'subject' => 'nullable|string|max:100|min:1|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s\.\,\-]+$/',
+            'message' => 'required|string|max:255|min:1|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s\.\,\-]+$/',
+
+        ]);
+
+        $nombre = $request->name;
+        $email = $request->email;
+        $phone = $request->phone;
+        $subject = $request->subject;
+        $body = $request->message;
+        //$emailestatico = 'siempregabo2016@gmail.com';
+        $emailestatico = 'erixon_12@hotmail.es';
+        //Mail::to('erixon_12@hotmail.es')->send(new Contacto($nombre, $email,$phone,$subject,$message));
+        Mail::to($emailestatico)->send(new Contacto($nombre, $email, $phone, $subject, $body));
+
+
+        return redirect()->route('Contacto')->with('success', 'Mensaje correctamente enviado');
+    }
+
 
     public function carrito()
     {
