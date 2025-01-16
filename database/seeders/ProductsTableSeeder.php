@@ -327,12 +327,12 @@ class ProductsTableSeeder extends Seeder
 
                 //Straps
                 ['nombre' => 'Straps sencilla de cinta',        'slug' => 'Straps-sencilla-de-cinta',       'mayoreo' => 0, 'precio' => 150.00,             'variante' => 0,    'precio_mayoreo' => null, 'category_id' => 8],
-                ['nombre' => 'Straps con muñequera ajustable',  'slug' => 'Straps con muñequera ajustable', 'mayoreo' => 0, 'precio' => 196.00,             'variante' => 0,    'precio_mayoreo' => null, 'category_id' => 8],
+                ['nombre' => 'Straps con muñequera ajustable',  'slug' => 'Straps-con-munequera-ajustable', 'mayoreo' => 0, 'precio' => 196.00,             'variante' => 0,    'precio_mayoreo' => null, 'category_id' => 8],
                 ['nombre' => 'Rodillera elastic',               'slug' => 'Rodillera-elastic',              'mayoreo' => 0, 'precio' => 284.00,             'variante' => 0,    'precio_mayoreo' => null, 'category_id' => 8],
                 ['nombre' => 'Guantes de agarre multiusos',     'slug' => 'Guantes-de-agarre-multiusos',    'mayoreo' => 0, 'precio' => 145.00,             'variante' => 0,    'precio_mayoreo' => null, 'category_id' => 8],
                 ['nombre' => 'Grilletes basicos',               'slug' => 'Grilletes-basicos',              'mayoreo' => 0, 'precio' => 138.00,             'variante' => 0,    'precio_mayoreo' => null, 'category_id' => 8],
                 ['nombre' => 'Callera doble D',                 'slug' => 'Callera-doble-D',                'mayoreo' => 0, 'precio' => 244.00,             'variante' => 0,    'precio_mayoreo' => null, 'category_id' => 8],
-                ['nombre' => 'Muñequera elastic',               'slug' => 'Muñequera-elastic',              'mayoreo' => 0, 'precio' => 215.00,             'variante' => 0,    'precio_mayoreo' => null, 'category_id' => 8],
+                ['nombre' => 'Muñequera elastic',               'slug' => 'Munequera-elastic',              'mayoreo' => 0, 'precio' => 215.00,             'variante' => 0,    'precio_mayoreo' => null, 'category_id' => 8],
                 ['nombre' => 'Grilletes 3 argollas',            'slug' => 'Grilletes-3-argollas',           'mayoreo' => 0, 'precio' => 322.00,             'variante' => 0,    'precio_mayoreo' => null, 'category_id' => 8],
                 ['nombre' => 'Rodilleras twerk',                'slug' => 'Rodilleras-twerk',               'mayoreo' => 0, 'precio' => 220.00,             'variante' => 0,    'precio_mayoreo' => null, 'category_id' => 8],
                 ['nombre' => 'Bandas de oclusión',              'slug' => 'Bandas-de-oclusion',             'mayoreo' => 0, 'precio' => 289.00,             'variante' => 0,    'precio_mayoreo' => null, 'category_id' => 8],

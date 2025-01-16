@@ -176,12 +176,10 @@
                                 } else {
                                     window.location.href = "{{ route('ConfirmarPedido') }}";
                                 }
-
                             })
                             .catch(error => {
                                 //window.location.href = "{{ route('ConfirmarPedido') }}";
                             });
-
                     },
                     onError: (error) => {
                         // callback llamado para todos los casos de error de Brick
@@ -191,9 +189,6 @@
             window.cardPaymentBrickController = await bricksBuilder.create('cardPayment',
                 'cardPaymentBrick_container', settings);
         };
-
-
-
         renderCardPaymentBrick(bricksBuilder);
     </script>
     

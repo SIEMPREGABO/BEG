@@ -11,7 +11,8 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="https://sdk.mercadopago.com/js/v2"></script>
     <link href="/output.css" rel="stylesheet">
-
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
 

@@ -378,7 +378,7 @@ class CartController extends Controller
     {
 
         $carrito = Session::get('carrito', []);
-        dd($request);
+        
         if (empty($carrito)) {
             return redirect()->route('Home');
         }
@@ -444,145 +444,14 @@ class CartController extends Controller
         if (empty($carrito)) {
             return redirect()->route('Home');
         }
-
         MercadoPagoConfig::setAccessToken(config('services.mercadopago.access_token'));
-        /*
-        if ($request->has('tarjeta_seleccionada')) {
-            $card = Card::where('id', $request->tarjeta_seleccionada)->first();
-            if ($request->filled('cvv')) {
-                if (decrypt($card->cvv) !== $request->cvv) {
-                    return redirect()->back()->withErrors(['cvv' => 'CVV incorrecto']);
-                } else {
-                    /*$cardToken = new  CardTokenClient();
-
-                    $request_options = new RequestOptions();
-
-                    $request_options->setCustomHeaders([
-                        "x-idempotency-key" => uniqid()
-                    ]);
-
-
-                    $createRequest = [
-                        "cardNumber" => decrypt($card->num_tarjeta),
-                        //"cardExpirationMonth" => $card->mes,
-                        //"cardExpirationYear" => $card->anio,
-                        "expirationDate" => $card->fvc, // Formato "MM/YY"
-                        "securityCode" => decrypt($card->cvv),
-                        "cardholderName" => $card->owner,
-                    ];
-
-
-                    $cardNumber = '5474925432670366';
-                    $cardholderName = 'APRO';
-                    $expirationDate = '11/25'; // El formato será MM/YY
-                    $securityCode = '123';
-
-                    // Crear el cliente de CardToken
-                    $cardTokenClient = new CardTokenClient();
-
-                    // Configurar las opciones de la solicitud
-                    $requestOptions = new RequestOptions();
-                    $requestOptions->setCustomHeaders([
-                        "x-idempotency-key" => uniqid() // Clave única para la idempotencia
-                    ]);
-
-                    // Crear la solicitud
-                    $createRequest = [
-                        "cardNumber" => $cardNumber, // Número de tarjeta
-                        "expirationDate" => $expirationDate, // Fecha de vencimiento
-                        "securityCode" => $securityCode, // CVV
-                        "cardholderName" => $cardholderName, // Nombre del titular
-                    ];
-
-                    try {
-                        $response = $cardTokenClient->create($createRequest, $requestOptions);
-
-                        // Imprimir el ID del token creado
-                        echo "Token de la tarjeta creado: " . $response->id;
-                    } catch (Exception $e) {
-                        // Manejar errores
-                        echo "Error al crear el token de la tarjeta: " . $e->getMessage();
-                    }
-
-                    //dd($createRequest);
-
-                    //$response = $cardToken->create($createRequest, $request_options);
-
-                    // Crear un nuevo pago usando el token de la tarjeta
-                    $client = new PaymentClient();
-
-                    $request_options = new RequestOptions();
-                    $request_options->setCustomHeaders([
-                        "X-idempotency-key" => uniqid()
-                    ]);
-
-                    $createRequest = [
-                        "token" => $response->id, // Usando el token generado
-                        "transaction_amount" => (float) $request->transaction_amount, // asegurando que sea un float
-                        "installments" => 1,
-                        "payer" => [
-                            "email" => 'siempregabo2016@gmail.com',
-                        ],
-                    ];
-
-
-                    //dd($createRequest);
-                    //$response3 = $client->create($createRequest, $request_options);
-
-                    //dd($response3);
-
-                    try {
-                        $response3 = $client->create($createRequest, $request_options);
-
-                        // Imprimir el ID del token creado
-                        echo "Pago creado: " . $response3;
-
-                        if ($response3->status === "approved") {
-                            return response()->json([
-                                'success' => true,
-                                'message' => 'Pago aprobado',
-                                'payment_id' => $response3->id,
-                                'status' => $response3->status,
-                                'status_detail' => $response3->status_detail,
-                                'transaction_amount' => $response3->transaction_amount,
-                                'date_approved' => $response3->date_approved
-                            ]);
-                        } else {
-                            return response()->json([
-                                'success' => false,
-                                'message' => 'Pago rechazado: ' . $response3->status_detail
-                            ]);
-                        }
-                    } catch (MPApiException $e) {
-                        // Handle API exceptions
-                        echo "Status code: " . $e->getApiResponse()->getStatusCode() . "\n";
-                        echo "Content: ";
-                        var_dump($e->getApiResponse()->getContent());
-                        echo "\n";
-                    } catch (\Exception $e) {
-                        // Handle all other exceptions
-                        echo $e->getMessage();
-                    }
-
-
-                    // Comprobar el estado del pago
-
-                }
-            } else {
-                return redirect()->back()->withErrors(['cvv' => 'Coloque el CVV']);
-            }
-        } else {*/
-
+        
         try {
-
             $client = new PaymentClient();
-
             $request_options = new RequestOptions();
-
             $request_options->setCustomHeaders([
                 "x-idempotency-key" => uniqid()
             ]);
-
             $createRequest = [
                 "token" => $request->token,
                 "issuer_id" => $request->issuer_id,
@@ -593,13 +462,8 @@ class CartController extends Controller
                     "email" => $request->payer['email'],
                 ],
             ];
-
-            $response = $client->create($createRequest, $request_options);
-
-
-
             // Crear el pago
-
+            $response = $client->create($createRequest, $request_options);
             // Comprobar si la respuesta es correcta
             if ($response->status === "approved") {
                 Session::put('payment_id', $response->id);
@@ -636,11 +500,11 @@ class CartController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Error del servidor, inténtelo nuevamente ',
-
             ], 500);
         }
         //}
     }
+
 
     //Manda el status 
     public function status()
@@ -651,9 +515,6 @@ class CartController extends Controller
         $address = Session::get('address');
         $codigo = Session::get('code');
         
-        
-
-
         if ($payment_id === null) {
             return redirect()->route('Home')->withErrors(['Error' => 'Error de mercado']);
         } else {
