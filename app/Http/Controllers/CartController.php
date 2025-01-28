@@ -441,7 +441,7 @@ class CartController extends Controller
     {
         $carrito = Session::get('carrito', []);
         //$address = Session
-        $costoFijoPrueba = 1;
+        $costoFijoPrueba = 10;
 
         if (empty($carrito)) {
             return redirect()->route('Home');
