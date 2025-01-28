@@ -254,7 +254,7 @@ class PruebaRelacion extends Seeder
                 return $item;
             })->toArray()
         );
-
+/*
         DB::table('size_product')->insert(
             collect([
                 //cuerda
@@ -268,6 +268,6 @@ class PruebaRelacion extends Seeder
                 $item['precio'] = round($item['precio'] * 1.16, 2); // Incrementa 16% y redondea a 2 decimales
                 return $item;
             })->toArray()
-        );
+        );*/
     }
 }
