@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CodeRequest;
 use App\Http\Requests\RegisterAdminRequest;
+use App\Mail\Estado;
 use App\Mail\Notification;
 use App\Models\Category;
 use App\Models\Code;
@@ -921,20 +922,33 @@ class AdminController extends Controller
         $order = Order::find($id);
         $order->state = $estado;
         $order->save();
+        try{
+            if ($order->email) {
+                Mail::to($order->email)->send(
+                    new Estado($order));
+            } else {
+                
+                Mail::to($order->user->email)->send(
+                    new Estado($order));
+            }
+        }catch(\Exception $e){
+            
+        }
+        
 
         return response()->json([
             'message' => 'Orden actualizada correctamente',
         ], 200);
     }
 
-  
+
 
     public function cambiarEstadoMayorista(Request $request)
     {
         try {
             $user = $request->userId;
             $state = filter_var($request->isChecked, FILTER_VALIDATE_BOOLEAN) ? 1 : 0;
-           
+
             // Buscar y actualizar la orden
             $usuario = User::find($user);
             $usuario->mayorista = $state;

@@ -1,8 +1,3 @@
-
-
-
-
-
 function mostrarFormularioDireccion() {
     document.getElementById('addDirection').classList.remove('hidden');
     const radios = document.querySelectorAll('input[name="direccion_seleccionada"]');
@@ -11,13 +6,9 @@ function mostrarFormularioDireccion() {
     });
 }
 
-
 document.addEventListener('DOMContentLoaded', function () {
     const menu = document.getElementById('addDirection');
     const radios = document.querySelectorAll('input[name="direccion_seleccionada"]');
-    const menucard = document.getElementById('addCard');
-    const radiosCard = document.querySelectorAll('input[name="tarjeta_seleccionada"]');
-
 
     radios.forEach(radio => {
         radio.addEventListener('change', function () {
@@ -36,8 +27,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const num_ext = document.getElementById('num_ext');
    
     if (
-        municipio.value !== "0" || 
-        estado.value !== "0" || 
+        municipio.value !== "" || 
+        estado.value !== "" || 
         cp.value !== '' || 
         colonia.value !== '' || 
         calle.value !== '' || 
@@ -50,19 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
         menu.classList.remove('hidden');
     } 
 
-    radiosCard.forEach(radio => {
-        radio.addEventListener('change', function () {
-            // Cierra el formulario de agregar dirección si está abierto
-            if (!menucard.classList.contains('hidden')) {
-                menucard.classList.add('hidden');
-            }
-        });
-    });
-
-    
-
-
 });
-
 
 window.mostrarFormularioDireccion = mostrarFormularioDireccion;

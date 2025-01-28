@@ -254,5 +254,20 @@ class PruebaRelacion extends Seeder
                 return $item;
             })->toArray()
         );
+
+        DB::table('size_product')->insert(
+            collect([
+                //cuerda
+                ['product_id' => 78, 'size_id' => 21, 'precio' => 367],
+                ['product_id' => 78, 'size_id' => 24, 'precio' => 463],
+                ['product_id' => 78, 'size_id' => 25, 'precio' => 544],
+                ['product_id' => 78, 'size_id' => 26, 'precio' => 579],
+                ['product_id' => 78, 'size_id' => 27, 'precio' => 649],
+
+            ])->map(function ($item) {
+                $item['precio'] = round($item['precio'] * 1.16, 2); // Incrementa 16% y redondea a 2 decimales
+                return $item;
+            })->toArray()
+        );
     }
 }

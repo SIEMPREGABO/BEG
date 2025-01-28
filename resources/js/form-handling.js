@@ -11,21 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-/*function openEditModal(cardId, lastDigits, owner, mes, anio) {
-    const owner_input = document.getElementById('owner_edit');
-    owner_input.value = owner;
-    const mes_input = document.getElementById('mes_edit');
-    mes_input.value = mes;
-    const anio_input = document.getElementById('anio_edit');
-    anio_input.value = anio;
-    const id_input = document.getElementById('card_id_hidden');
-    id_input.value = cardId;
-    const put_input = document.getElementById('put');
-    put_input.textContent = 'Editar Tarjeta ' + lastDigits;
-    const modal = document.getElementById('edit-card-modal');
-    modal.classList.remove('hidden');
-}¨*/
-
 function openEditModalAddress(addressId, estado, municipio, colonia, cp, calle, num_ext, num_int) {
     const id_input = document.getElementById('address_id_hidden');
     id_input.value = addressId;
@@ -72,28 +57,26 @@ function openEditModalAddress(addressId, estado, municipio, colonia, cp, calle, 
     modal.classList.remove('hidden');
 }
 
-//cierra modal tarjetas
-
 function closeModal() {
     const modal = document.getElementById('edit-card-modal');
     modal.classList.add('hidden');
 }
-
-//cierra el modal direcciones
 
 function closeModalAddress() {
     const modal = document.getElementById('edit-address-modal');
     modal.classList.add('hidden');
 }
 
-function cambiarSelect() {
-    const estados = document.getElementById('estado').value;
-    const municipioSelect = document.getElementById('municipio');
+function cambiarSelectGenerico(estadoId, municipioId) {
+    const estadoSelect = document.getElementById(estadoId);
+    const municipioSelect = document.getElementById(municipioId);
+    const estado = estadoSelect.value;
+
     fetch('/data/municipios.json')
         .then(response => response.json())
         .then(data => {
-            if (data[estados]) {
-                const municipios = data[estados];
+            if (data[estado]) {
+                const municipios = data[estado];
                 municipioSelect.length = municipios.length;
                 municipios.forEach((municipio, index) => {
                     municipioSelect.options[index] = new Option(municipio, municipio);
@@ -108,52 +91,20 @@ function cambiarSelect() {
     municipioSelect.options[0].selected = true;
 }
 
+
+function cambiarSelect() {
+    cambiarSelectGenerico('estado', 'municipio');
+}
 
 function cambiarSelectEnvio() {
-    const estados = document.getElementById('estadoEnvio').value;
-    const municipioSelect = document.getElementById('municipioEnvio');
-    fetch('/data/municipios.json')
-        .then(response => response.json())
-        .then(data => {
-            if (data[estados]) {
-                const municipios = data[estados];
-                municipioSelect.length = municipios.length;
-                municipios.forEach((municipio, index) => {
-                    municipioSelect.options[index] = new Option(municipio, municipio);
-                });
-            } else {
-                // Si no hay municipios para el estado seleccionado
-                municipioSelect.length = 1;
-                municipioSelect.options[0] = new Option("-", "");
-            }
-        })
-        .catch(error => console.error('Error al cargar los municipios:', error));
-    municipioSelect.options[0].selected = true;
-};
-
-function cambiarSelectEdit() {
-    const estados = document.getElementById('estado_edit').value;
-    const municipioSelect = document.getElementById('municipio_edit');
-    fetch('/data/municipios.json')
-        .then(response => response.json())
-        .then(data => {
-            if (data[estados]) {
-                const municipios = data[estados];
-                municipioSelect.length = municipios.length;
-                municipios.forEach((municipio, index) => {
-                    municipioSelect.options[index] = new Option(municipio, municipio);
-                });
-            } else {
-                // Si no hay municipios para el estado seleccionado
-                municipioSelect.length = 1;
-                municipioSelect.options[0] = new Option("-", "");
-            }
-        })
-        .catch(error => console.error('Error al cargar los municipios:', error));
-    municipioSelect.options[0].selected = true;
+    cambiarSelectGenerico('estadoEnvio', 'municipioEnvio');
 }
 
+function cambiarSelectEdit() {
+    cambiarSelectGenerico('estado_edit', 'municipio_edit');
+}
 
+window.cambiarSelectGenerico = cambiarSelectGenerico;
 window.cambiarSelect = cambiarSelect;
 window.cambiarSelectEdit = cambiarSelectEdit;
 window.cambiarSelectEnvio = cambiarSelectEnvio;
