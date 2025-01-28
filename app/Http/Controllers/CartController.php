@@ -441,11 +441,13 @@ class CartController extends Controller
     {
         $carrito = Session::get('carrito', []);
         //$address = Session
+        $costoFijoPrueba = 1;
+
         if (empty($carrito)) {
             return redirect()->route('Home');
         }
         MercadoPagoConfig::setAccessToken(config('services.mercadopago.access_token'));
-        
+        //                "transaction_amount" => $request->transaction_amount,
         try {
             $client = new PaymentClient();
             $request_options = new RequestOptions();
@@ -456,7 +458,7 @@ class CartController extends Controller
                 "token" => $request->token,
                 "issuer_id" => $request->issuer_id,
                 "payment_method_id" => $request->payment_method_id,
-                "transaction_amount" => $request->transaction_amount,
+                "transaction_amount" => $costoFijoPrueba,
                 "installments" => $request->installments,
                 "payer" => [
                     "email" => $request->payer['email'],
