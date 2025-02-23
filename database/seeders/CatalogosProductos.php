@@ -116,7 +116,7 @@ class CatalogosProductos extends Seeder
             ['weight' => '40', 'is_kg' => 0],       //28
             ['weight' => '50', 'is_kg' => 0],       //29
             ['weight' => '60', 'is_kg' => 0],       //30
-            ['weight' => '2.5', 'is_kg' => 0],      //31
+            ['weight' => '2.5', 'is_kg' => 1],      //31
         ]);
 
         DB::table('lengths')->insert([

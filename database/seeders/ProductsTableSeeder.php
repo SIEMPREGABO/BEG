@@ -348,6 +348,8 @@ class ProductsTableSeeder extends Seeder
                 ['nombre' => 'Cable con forro pvc',                     'slug' => 'Cable-con-forro-pvc-x-metro',               'mayoreo' => 1, 'precio' => 40,             'variante' => 1,    'precio_mayoreo' => null, 'category_id' => 6],
                 //longitudes cable 
                 ['nombre' => 'Cable con forro pvc bobina',              'slug' => 'Cable-con-forro-pvc-bobina',                'mayoreo' => 1, 'precio' => 4000,           'variante' => 0,    'precio_mayoreo' => null, 'category_id' => 6],
+                ['nombre' => 'Buje 1 1/4',              'slug' => 'Buje-1-1-4',                'mayoreo' => 0, 'precio' => 47,           'variante' => 0,    'precio_mayoreo' => null, 'category_id' => 6],
+                ['nombre' => 'Campana',              'slug' => 'Campana',                'mayoreo' => 0, 'precio' => 41,           'variante' => 1,    'precio_mayoreo' => null, 'category_id' => 6],
 
             ])->map(function ($item) {
                 $item['precio'] = round($item['precio'] * 1.16, 2); // Incrementa 16% y redondea a 2 decimales

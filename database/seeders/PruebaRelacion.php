@@ -261,34 +261,48 @@ class PruebaRelacion extends Seeder
 
         DB::table('size_product')->insert(
             collect([
-                //cuerda
+                //selector
                 ['product_id' => 125, 'size_id' => 1, 'precio' => 87],
                 ['product_id' => 125, 'size_id' => 2, 'precio' => 105],
+                //bandola
                 ['product_id' => 155, 'size_id' => 3, 'precio' => 36],
                 ['product_id' => 155, 'size_id' => 4, 'precio' => 43],
                 ['product_id' => 155, 'size_id' => 5, 'precio' => 50],
                 ['product_id' => 155, 'size_id' => 6, 'precio' => 65],
+                //puntas popping
                 ['product_id' => 161, 'size_id' => 1, 'precio' => 47],
                 ['product_id' => 161, 'size_id' => 2, 'precio' => 47],
+                //guias
                 ['product_id' => 167, 'size_id' => 10, 'precio' => 5500],
                 ['product_id' => 167, 'size_id' => 11, 'precio' => 6150],
+                //rodillo prop
                 ['product_id' => 172, 'size_id' => 7, 'precio' => 348],
                 ['product_id' => 172, 'size_id' => 8, 'precio' => 290],
                 ['product_id' => 172, 'size_id' => 9, 'precio' => 870],
+                //tapa interna
                 ['product_id' => 185, 'size_id' => 17, 'precio' => 20],
                 ['product_id' => 185, 'size_id' => 18, 'precio' => 26],
                 ['product_id' => 185, 'size_id' => 19, 'precio' => 29],
                 ['product_id' => 185, 'size_id' => 20, 'precio' => 29],
                 ['product_id' => 185, 'size_id' => 21, 'precio' => 31],
+                //reductores
                 ['product_id' => 187, 'size_id' => 22, 'precio' => 29],
                 ['product_id' => 187, 'size_id' => 23, 'precio' => 32],
+                //balero lineal
                 ['product_id' => 191, 'size_id' => 10, 'precio' => 410],
                 ['product_id' => 191, 'size_id' => 11, 'precio' => 520],
                 ['product_id' => 191, 'size_id' => 12, 'precio' => 640],
+                //poleas
                 ['product_id' => 192, 'size_id' => 15, 'precio' => 100],
                 ['product_id' => 192, 'size_id' => 16, 'precio' => 110],
+                //regatones
                 ['product_id' => 193, 'size_id' => 17, 'precio' => 35],
                 ['product_id' => 193, 'size_id' => 18, 'precio' => 46],
+                //campana
+                ['product_id' => 225, 'size_id' => 13, 'precio' => 41],
+                ['product_id' => 225, 'size_id' => 14, 'precio' => 53],
+
+
 
 
 
@@ -300,8 +314,8 @@ class PruebaRelacion extends Seeder
 
 
         DB::table('length_product')->insert(
-            collect(range(32, 179))->map(function ($length_id) {
-                $precioBase = 100 + ($length_id - 32) * 50; // Ajusta la lógica de precios si es necesario
+            collect(range(31, 179))->map(function ($length_id) {
+                $precioBase = 50 + ($length_id - 31) * 50; // Ajusta la lógica de precios si es necesario
                 return [
                     'product_id' => 176,
                     'length_id' => $length_id,
@@ -311,8 +325,8 @@ class PruebaRelacion extends Seeder
         );
 
         DB::table('length_product')->insert(
-            collect(range(32, 179))->map(function ($length_id) {
-                $precioBase = 80 + ($length_id - 32) * 40; // Ajusta la lógica de precios si es necesario
+            collect(range(31, 179))->map(function ($length_id) {
+                $precioBase = 40 + ($length_id - 31) * 40; // Ajusta la lógica de precios si es necesario
                 return [
                     'product_id' => 223,
                     'length_id' => $length_id,
@@ -320,7 +334,5 @@ class PruebaRelacion extends Seeder
                 ];
             })->toArray()
         );
-
-        
     }
 }
