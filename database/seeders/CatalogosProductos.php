@@ -57,29 +57,29 @@ class CatalogosProductos extends Seeder
         ]);
 
         DB::table('sizes')->insert([
-            ['size' => '5/16'],
-            ['size' => '3/8'],
-            ['size' => '#7'],
-            ['size' => '#8'],
+            ['size' => '5/16'], //1
+            ['size' => '3/8'],  //2
+            ['size' => '#7'],   //3
+            ['size' => '#8'],   
             ['size' => '#9'],
             ['size' => '#10'],
-            ['size' => '20x12 cm'],
-            ['size' => '18x10 cm'],
-            ['size' => '50x12 cm'],
-            ['size' => '1 in'],
-            ['size' => '1 1/4 in'],
-            ['size' => '1 1/2 in'],
-            ['size' => '2.5 in'],
-            ['size' => '3 in'],
-            ['size' => '3.5 in'],
-            ['size' => '4.5 in'],
-            ['size' => '2x2 in'],
-            ['size' => '3x2 in'],
-            ['size' => '2.5x2.5 in'],
-            ['size' => '3x1.5 in'],
-            ['size' => '4x2 in'],
-            ['size' => '2-1.5 in'],
-            ['size' => '2.5-2 in'],
+            ['size' => '20x12 cm'], //7
+            ['size' => '18x10 cm'], //8
+            ['size' => '50x12 cm'], //9
+            ['size' => '1 in'], //10
+            ['size' => '1 1/4 in'],//11
+            ['size' => '1 1/2 in'],//12
+            ['size' => '2.5 in'],//13
+            ['size' => '3 in'],//14
+            ['size' => '3.5 in'],//15
+            ['size' => '4.5 in'],//16
+            ['size' => '2x2 in'],//17
+            ['size' => '3x2 in'],//18
+            ['size' => '2.5x2.5 in'],//19
+            ['size' => '3x1.5 in'],//20
+            ['size' => '4x2 in'],//21
+            ['size' => '2-1.5 in'],//22
+            ['size' => '2.5-2 in'],//23
 
 
  

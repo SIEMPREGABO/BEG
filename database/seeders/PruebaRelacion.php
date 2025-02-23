@@ -232,7 +232,10 @@ class PruebaRelacion extends Seeder
                 ['product_id' => 110, 'length_id' => 22, 'precio' => 349],
                 ['product_id' => 110, 'length_id' => 23, 'precio' => 397],
 
-                //
+                //rodillo de tapiceria
+
+                ['product_id' => 168, 'length_id' => 15, 'precio' => 240],
+                ['product_id' => 168, 'length_id' => 18, 'precio' => 580],
             ])->map(function ($item) {
                 $item['precio'] = round($item['precio'] * 1.16, 2); // Incrementa 16% y redondea a 2 decimales
                 return $item;
@@ -254,20 +257,59 @@ class PruebaRelacion extends Seeder
                 return $item;
             })->toArray()
         );
-/*
+
+
         DB::table('size_product')->insert(
             collect([
                 //cuerda
-                ['product_id' => 78, 'size_id' => 21, 'precio' => 367],
-                ['product_id' => 78, 'size_id' => 24, 'precio' => 463],
-                ['product_id' => 78, 'size_id' => 25, 'precio' => 544],
-                ['product_id' => 78, 'size_id' => 26, 'precio' => 579],
-                ['product_id' => 78, 'size_id' => 27, 'precio' => 649],
+                ['product_id' => 125, 'size_id' => 1, 'precio' => 87],
+                ['product_id' => 125, 'size_id' => 2, 'precio' => 105],
+                ['product_id' => 155, 'size_id' => 3, 'precio' => 36],
+                ['product_id' => 155, 'size_id' => 4, 'precio' => 43],
+                ['product_id' => 155, 'size_id' => 5, 'precio' => 50],
+                ['product_id' => 155, 'size_id' => 6, 'precio' => 65],
+                ['product_id' => 161, 'size_id' => 1, 'precio' => 47],
+                ['product_id' => 161, 'size_id' => 2, 'precio' => 47],
+                ['product_id' => 167, 'size_id' => 10, 'precio' => 5500],
+                ['product_id' => 167, 'size_id' => 11, 'precio' => 6150],
+                ['product_id' => 172, 'size_id' => 7, 'precio' => 348],
+                ['product_id' => 172, 'size_id' => 8, 'precio' => 290],
+                ['product_id' => 172, 'size_id' => 9, 'precio' => 870],
+                ['product_id' => 185, 'size_id' => 17, 'precio' => 20],
+                ['product_id' => 185, 'size_id' => 18, 'precio' => 26],
+                ['product_id' => 185, 'size_id' => 19, 'precio' => 29],
+                ['product_id' => 185, 'size_id' => 20, 'precio' => 29],
+                ['product_id' => 185, 'size_id' => 21, 'precio' => 31],
+                ['product_id' => 187, 'size_id' => 22, 'precio' => 29],
+                ['product_id' => 187, 'size_id' => 23, 'precio' => 32],
+                ['product_id' => 191, 'size_id' => 10, 'precio' => 410],
+                ['product_id' => 191, 'size_id' => 11, 'precio' => 520],
+                ['product_id' => 191, 'size_id' => 12, 'precio' => 640],
+                ['product_id' => 192, 'size_id' => 15, 'precio' => 100],
+                ['product_id' => 192, 'size_id' => 16, 'precio' => 110],
+                ['product_id' => 193, 'size_id' => 17, 'precio' => 35],
+                ['product_id' => 193, 'size_id' => 18, 'precio' => 46],
+
+
 
             ])->map(function ($item) {
                 $item['precio'] = round($item['precio'] * 1.16, 2); // Incrementa 16% y redondea a 2 decimales
                 return $item;
             })->toArray()
-        );*/
+        );
+
+
+        DB::table('length_product')->insert(
+            collect(range(32, 179))->map(function ($length_id) {
+                $precioBase = 100 + ($length_id - 32) * 50; // Ajusta la lógica de precios si es necesario
+                return [
+                    'product_id' => 176,
+                    'length_id' => $length_id,
+                    'precio' => round($precioBase * 1.16, 2), // Aplica el 16% de incremento
+                ];
+            })->toArray()
+        );
+
+        
     }
 }
