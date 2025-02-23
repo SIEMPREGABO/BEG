@@ -310,6 +310,17 @@ class PruebaRelacion extends Seeder
             })->toArray()
         );
 
+        DB::table('length_product')->insert(
+            collect(range(32, 179))->map(function ($length_id) {
+                $precioBase = 80 + ($length_id - 32) * 40; // Ajusta la lógica de precios si es necesario
+                return [
+                    'product_id' => 223,
+                    'length_id' => $length_id,
+                    'precio' => round($precioBase * 1.16, 2), // Aplica el 16% de incremento
+                ];
+            })->toArray()
+        );
+
         
     }
 }

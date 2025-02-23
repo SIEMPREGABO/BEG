@@ -344,6 +344,11 @@ class ProductsTableSeeder extends Seeder
                 ['nombre' => 'Straps premium',                  'slug' => 'Straps-premium',                 'mayoreo' => 0, 'precio' => 266,                'variante' => 0,    'precio_mayoreo' => null, 'category_id' => 8],
                 //['nombre' => '', 'slug' => '', 'mayoreo' => 0, 'precio' => , 'precio_mayoreo' => null, 'category_id' => 8],
 
+
+                ['nombre' => 'Cable con forro pvc',                     'slug' => 'Cable-con-forro-pvc-x-metro',               'mayoreo' => 1, 'precio' => 40,             'variante' => 1,    'precio_mayoreo' => null, 'category_id' => 6],
+                //longitudes cable 
+                ['nombre' => 'Cable con forro pvc bobina',              'slug' => 'Cable-con-forro-pvc-bobina',                'mayoreo' => 1, 'precio' => 4000,           'variante' => 0,    'precio_mayoreo' => null, 'category_id' => 6],
+
             ])->map(function ($item) {
                 $item['precio'] = round($item['precio'] * 1.16, 2); // Incrementa 16% y redondea a 2 decimales
                 return $item;
