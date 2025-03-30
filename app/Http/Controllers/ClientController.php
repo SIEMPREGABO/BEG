@@ -466,7 +466,7 @@ class ClientController extends Controller
 
 
 
-        return response()->json(['price' => $query]);
+        return response()->json(['producto' => $query]);
     }
 
 
