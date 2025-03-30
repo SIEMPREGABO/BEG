@@ -30,7 +30,7 @@ class EmpaquetadoController extends Controller
 
             foreach ($cajas as $caja) {
                 //dd($caja);
-                $resultado = $this->empacarObjetos( $objetosPorEmpacar, $caja);
+                $resultado = $this->empacarObjetos($objetosPorEmpacar, $caja);
 
                 if ($resultado['porcentaje_usado'] > $maxPorcentaje) {
                     $maxPorcentaje = $resultado['porcentaje_usado'];
@@ -46,7 +46,7 @@ class EmpaquetadoController extends Controller
                 break; // No hay cajas que puedan contener los objetos restantes
             }
         }
-        dd($precioTotal,$resultado);
+        dd($precioTotal, $resultado);
         return $precioTotal;
         /*$cajasDisponibles = Caja::orderBy('precio')->get()->toArray();
         $objetosPorEmpacar = $this->convertirCarritoAObjetos($carrito);
@@ -76,7 +76,7 @@ class EmpaquetadoController extends Controller
     {
         $objetos = [];
         foreach ($carrito as $producto) {
-            if($producto['ancho'] !== null &&$producto['alto'] !== null && $producto['largo'] !== null && $producto['peso'] !== null){
+            if ($producto['ancho'] !== null && $producto['alto'] !== null && $producto['largo'] !== null && $producto['peso'] !== null) {
                 for ($i = 0; $i < $producto['cantidad']; $i++) {
                     $objetos[] = [
                         'producto_id' => $producto['id'],
@@ -89,7 +89,6 @@ class EmpaquetadoController extends Controller
                     ];
                 }
             }
-            
         }
         return $objetos;
     }
@@ -116,7 +115,77 @@ class EmpaquetadoController extends Controller
         return $mejorCaja;
     }*/
 
-    private function empacarObjetos( array $objetos, array $caja): array
+
+    private function generarRotaciones(array $objeto): array
+    {
+        $dimensionesOriginales = [
+            'ancho' => $objeto['ancho'],
+            'alto' => $objeto['alto'],
+            'largo' => $objeto['largo']
+        ];
+
+        // Todas las posibles permutaciones de las dimensiones (6 rotaciones posibles en 3D)
+        $rotaciones = [
+            // Rotación 0: original (ancho, alto, largo)
+            [
+                'ancho' => $dimensionesOriginales['ancho'],
+                'alto' => $dimensionesOriginales['alto'],
+                'largo' => $dimensionesOriginales['largo'],
+                'rotacion' => 'original'
+            ],
+            // Rotación 1: intercambiar ancho y alto
+            [
+                'ancho' => $dimensionesOriginales['alto'],
+                'alto' => $dimensionesOriginales['ancho'],
+                'largo' => $dimensionesOriginales['largo'],
+                'rotacion' => 'intercambio_ancho_alto'
+            ],
+            // Rotación 2: intercambiar ancho y largo
+            [
+                'ancho' => $dimensionesOriginales['largo'],
+                'alto' => $dimensionesOriginales['alto'],
+                'largo' => $dimensionesOriginales['ancho'],
+                'rotacion' => 'intercambio_ancho_largo'
+            ],
+            // Rotación 3: intercambiar alto y largo
+            [
+                'ancho' => $dimensionesOriginales['ancho'],
+                'alto' => $dimensionesOriginales['largo'],
+                'largo' => $dimensionesOriginales['alto'],
+                'rotacion' => 'intercambio_alto_largo'
+            ],
+            // Rotación 4: rotación triple 1
+            [
+                'ancho' => $dimensionesOriginales['alto'],
+                'alto' => $dimensionesOriginales['largo'],
+                'largo' => $dimensionesOriginales['ancho'],
+                'rotacion' => 'rotacion_triple_1'
+            ],
+            // Rotación 5: rotación triple 2
+            [
+                'ancho' => $dimensionesOriginales['largo'],
+                'alto' => $dimensionesOriginales['ancho'],
+                'largo' => $dimensionesOriginales['alto'],
+                'rotacion' => 'rotacion_triple_2'
+            ]
+        ];
+
+        // Eliminar rotaciones duplicadas (cuando el objeto tiene dimensiones iguales)
+        $rotacionesUnicas = [];
+        $vistas = [];
+
+        foreach ($rotaciones as $rotacion) {
+            $clave = $rotacion['ancho'] . '-' . $rotacion['alto'] . '-' . $rotacion['largo'];
+            if (!in_array($clave, $vistas)) {
+                $vistas[] = $clave;
+                $rotacionesUnicas[] = $rotacion;
+            }
+        }
+
+        return $rotacionesUnicas;
+    }
+
+    private function empacarObjetos(array $objetos, array $caja): array
     {
         // 1. Inicialización de variables
         //dd('pase');
@@ -147,41 +216,56 @@ class EmpaquetadoController extends Controller
 
             $empacado = false;
 
-            // Buscar posición en 3D (x, y, z)
-            for ($x = 0; $x <= $caja['ancho'] - $objeto['ancho']; $x++) {
-                for ($y = 0; $y <= $caja['alto'] - $objeto['alto']; $y++) {
-                    for ($z = 0; $z <= $caja['largo'] - $objeto['largo']; $z++) {
+            $rotaciones = $this->generarRotaciones($objeto);
 
-                        // Verificar colisión con objetos ya empacados
-                        if ($this->espacioDisponible($x, $y, $z, $objeto['ancho'], $objeto['alto'], $objeto['largo'], $puntosOcupados)) {
+            // Probar cada rotación posible
+            foreach ($rotaciones as $rotacion) {
+                // Solo considerar rotaciones que caben en la caja
+                if (
+                    $rotacion['ancho'] > $caja['ancho'] ||
+                    $rotacion['alto'] > $caja['alto'] ||
+                    $rotacion['largo'] > $caja['largo']
+                ) {
+                    continue;
+                }
 
-                            // Registrar el espacio ocupado
-                            $puntosOcupados[] = [
-                                'x' => $x,
-                                'y' => $y,
-                                'z' => $z,
-                                'ancho' => $objeto['ancho'],
-                                'alto' => $objeto['alto'],
-                                'largo' => $objeto['largo']
-                            ];
+                // Buscar posición en 3D (x, y, z) para esta rotación
+                for ($x = 0; $x <= $caja['ancho'] - $rotacion['ancho']; $x++) {
+                    for ($y = 0; $y <= $caja['alto'] - $rotacion['alto']; $y++) {
+                        for ($z = 0; $z <= $caja['largo'] - $rotacion['largo']; $z++) {
 
-                            // Registrar objeto empacado
-                            $objetosEmpacados[] = [
-                                'posicion' => ['x' => $x, 'y' => $y, 'z' => $z],
-                                'dimensiones' => [
-                                    'ancho' => $objeto['ancho'],
-                                    'alto' => $objeto['alto'],
-                                    'largo' => $objeto['largo']
-                                ],
-                                'peso' => $objeto['peso'],
-                                'producto_id' => $objeto['producto_id'],
-                                'caja_id' => $caja['id']
-                            ];
+                            // Verificar colisión con objetos ya empacados
+                            if ($this->espacioDisponible($x, $y, $z, $rotacion['ancho'], $rotacion['alto'], $rotacion['largo'], $puntosOcupados)) {
 
-                            $volumenOcupado += $objeto['ancho'] * $objeto['alto'] * $objeto['largo'];
-                            $pesoTotal += $objeto['peso'];
-                            $empacado = true;
-                            break 3; // Salir de los 3 bucles anidados
+                                // Registrar el espacio ocupado
+                                $puntosOcupados[] = [
+                                    'x' => $x,
+                                    'y' => $y,
+                                    'z' => $z,
+                                    'ancho' => $rotacion['ancho'],
+                                    'alto' => $rotacion['alto'],
+                                    'largo' => $rotacion['largo']
+                                ];
+
+                                // Registrar objeto empacado
+                                $objetosEmpacados[] = [
+                                    'posicion' => ['x' => $x, 'y' => $y, 'z' => $z],
+                                    'dimensiones' => [
+                                        'ancho' => $rotacion['ancho'],
+                                        'alto' => $rotacion['alto'],
+                                        'largo' => $rotacion['largo']
+                                    ],
+                                    'rotacion' => $rotacion['rotacion'], // Tipo de rotación aplicada
+                                    'peso' => $objeto['peso'],
+                                    'producto_id' => $objeto['producto_id'],
+                                    'caja_id' => $caja['id']
+                                ];
+
+                                $volumenOcupado += $rotacion['ancho'] * $rotacion['alto'] * $rotacion['largo'];
+                                $pesoTotal += $objeto['peso'];
+                                $empacado = true;
+                                break 4; // Salir de los 4 bucles anidados (incluyendo el de rotaciones)
+                            }
                         }
                     }
                 }
@@ -191,7 +275,7 @@ class EmpaquetadoController extends Controller
                 $objetosNoEmpacados[] = $objeto;
             }
         }
-       
+
         // 4. Calcular métricas finales
         $porcentajeUsado = $volumenCaja > 0 ? ($volumenOcupado / $volumenCaja) * 100 : 0;
 
@@ -210,7 +294,7 @@ class EmpaquetadoController extends Controller
     /**
      * Calcula el volumen de una caja
      */
-    private function calcularVolumen( $caja): float
+    private function calcularVolumen($caja): float
     {
         return $caja['ancho'] * $caja['alto'] * $caja['largo'];
     }
