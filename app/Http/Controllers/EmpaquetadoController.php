@@ -29,6 +29,7 @@ class EmpaquetadoController extends Controller
             $maxPorcentaje = 0;
 
             foreach ($cajas as $caja) {
+                dd($caja);
                 $resultado = $this->empacarObjetos($caja['dimensiones'], $objetosPorEmpacar, $caja);
 
                 if ($resultado['porcentaje_usado'] > $maxPorcentaje) {
