@@ -38,6 +38,73 @@ class CatalogosProductos extends Seeder
             ['nombre' => 'Straps', 'slug' => 'Straps'],
         ]);
 
+        DB::table('cajas')->insert([
+            [
+                'id' => 1,
+                'nombre' => 'Caja Pequeña (20x20x20)',
+                'ancho' => 20,
+                'alto' => 20,
+                'largo' => 20,
+                'peso_maximo' => 1,
+                'precio' => 180
+            ],
+            [
+                'id' => 2,
+                'nombre' => 'Caja Mediana 1 (20x30x40)',
+                'ancho' => 20,
+                'alto' => 30,
+                'largo' => 40,
+                'peso_maximo' => 5,
+                'precio' => 250
+            ],
+            [
+                'id' => 3,
+                'nombre' => 'Caja Mediana 2 (20x40x50)',
+                'ancho' => 20,
+                'alto' => 40,
+                'largo' => 50,
+                'peso_maximo' => 10,
+                'precio' => 350
+            ],
+            [
+                'id' => 4,
+                'nombre' => 'Caja Grande 1 (30x40x50)',
+                'ancho' => 30,
+                'alto' => 40,
+                'largo' => 50,
+                'peso_maximo' => 20,
+                'precio' => 550
+            ],
+            [
+                'id' => 5,
+                'nombre' => 'Caja Grande 2 (30x40x50) - Peso Extra',
+                'ancho' => 30,
+                'alto' => 40,
+                'largo' => 50,
+                'peso_maximo' => 30,
+                'precio' => 650
+            ],
+            [
+                'id' => 6,
+                'nombre' => 'Caja XL (40x40x60)',
+                'ancho' => 40,
+                'alto' => 40,
+                'largo' => 60,
+                'peso_maximo' => 40,
+                'precio' => 850
+            ],
+            [
+                'id' => 7,
+                'nombre' => 'Caja Plana (200x20x20)',
+                'ancho' => 200,
+                'alto' => 20,
+                'largo' => 20,
+                'peso_maximo' => 20,
+                'precio' => 1100
+            ]
+        
+        ]);
+
         DB::table('materials')->insert([
             ['material' => 'hule'],
             ['material' => 'latex'],

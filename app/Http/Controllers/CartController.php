@@ -59,6 +59,10 @@ class CartController extends Controller
             'length' => $request->length,
             'size' => $request->size,
             'wholesale' => $request->wholesale,
+            'peso' => $request->peso,
+            'alto' => $request->alto,
+            'ancho' => $request->ancho,
+            'largo' => $request->largo,
         ];
 
         try {
@@ -378,14 +382,14 @@ class CartController extends Controller
     {
 
         $carrito = Session::get('carrito', []);
-        
+
         if (empty($carrito)) {
             return redirect()->route('Home');
         }
 
         $this->getOrCreateAddress($request);
         $subtotal = $this->getSubtotal();
-        $envio = $this->getDelivery();
+        $envio = $this->getDelivery($carrito);
         $descuentoTotal = 0;
         $total = 0;
 
@@ -516,7 +520,7 @@ class CartController extends Controller
         $carrito = Session::get('carrito', []);
         $address = Session::get('address');
         $codigo = Session::get('code');
-        
+
         if ($payment_id === null) {
             return redirect()->route('Home')->withErrors(['Error' => 'Error de mercado']);
         } else {
@@ -524,7 +528,7 @@ class CartController extends Controller
                 DB::beginTransaction();
                 try {
                     $subtotal = $this->getSubtotal();
-                    $envio = $this->getDelivery();
+                    $envio = $this->getDelivery($carrito);
                     $descuentoTotal = $this->getDescuento($codigo);
                     $descuentoTotal += $this->getDescuentoIVA();
                     $costoTotalEnvio = $envio['costo_total_envio'];
@@ -872,33 +876,183 @@ class CartController extends Controller
         }
     }
 
-    private function getDelivery()
+    private function getDelivery($carrito)
     {
-        $address = Session::get('address');
-        $carrito = Session::get('carrito', []);
-        $envio = 0;
-        $detallesEnvio = [];
-        foreach ($carrito as &$producto) {
-            $response = $this->delivery(1, 1, 1, 1, $address->cp);
-            try {
-                $envioProducto = $response['envio'] * $producto['cantidad'];
-                $envio += $envioProducto;
-                $detallesEnvio[] = [
-                    'precio_envio' => $envioProducto,
-                    'proveedor' => $response['proveedor']
+        $cajas = [
+            ['id' => 1, 'peso' => 1, 'dimensiones' => [20, 20, 20], 'precio' => 180],
+            ['id' => 2, 'peso' => 5, 'dimensiones' => [20, 30, 40], 'precio' => 250],
+            ['id' => 3, 'peso' => 10, 'dimensiones' => [20, 40, 50], 'precio' => 350],
+            ['id' => 4, 'peso' => 20, 'dimensiones' => [30, 40, 50], 'precio' => 550],
+            ['id' => 5, 'peso' => 30, 'dimensiones' => [30, 40, 50], 'precio' => 650],
+            ['id' => 6, 'peso' => 40, 'dimensiones' => [40, 40, 60], 'precio' => 850],
+            ['id' => 7, 'peso' => 20, 'dimensiones' => [200, 20, 20], 'precio' => 1100]
+        ];
+
+        $objetosPorEmpacar = [];
+        foreach ($carrito as $producto) {
+            for ($i = 0; $i < $producto['cantidad']; $i++) {
+                $objetosPorEmpacar[] = [
+                    
+                    $producto['ancho'],
+                    $producto['alto'],
+                    $producto['largo'],
+                    $producto['peso']
                 ];
-                $producto['precio_envio'] = $envioProducto;
-                $producto['proveedor'] = $response['proveedor'];
-            } catch (\Throwable $th) {
+            }
+        }
+
+        $precioTotal = 0;
+        $cajasUsadas = 0;
+        $resultados = [];
+
+        while (!empty($objetosPorEmpacar)) {
+            $mejorResultado = null;
+            $mejorCaja = null;
+
+            foreach ($cajas as $caja) {
+                $resultado = $this->empacarObjetos($caja['dimensiones'], $objetosPorEmpacar, $caja);
+
+                if (!$mejorResultado || $resultado['porcentaje_usado'] > $mejorResultado['porcentaje_usado']) {
+                    $mejorResultado = $resultado;
+                    $mejorCaja = $caja;
+                }
+            }
+
+            if ($mejorResultado) {
+                $precioTotal += $mejorCaja['precio'];
+                $cajasUsadas++;
+                //$cajasUsadas++;
+                $resultados[] = [
+                    'caja' => $mejorCaja,
+                    'resultado' => $mejorResultado
+                ];
+
+                foreach ($mejorResultado['objetos_empacados'] as $productoEmpacado) {
+                    $productosConCaja[] = array_merge($productoEmpacado, [
+                        'id_caja' => $mejorCaja['id'],
+                        'numero_caja' => $cajasUsadas
+                    ]);
+                };
+
+                $objetosPorEmpacar = $mejorResultado['objetos_no_empacados'];
+            } else {
                 break;
             }
         }
-        Session::put('carrito', $carrito);
+
+        //todavia no quiero que retorne por que solo debe retornar el costo
         return [
-            'costo_total_envio' => $envio,
-            'detalles_envio' => $detallesEnvio
+            'precio_total_envio' => $precioTotal,
+            'productos_con_caja' => $productosConCaja,
+            'resumen_cajas' => $resultados
         ];
     }
+
+
+    private function empacarObjetos($dimensionesCaja, $carrito, $caja)
+    {
+        $volumenCaja = $this->volumenTotal($dimensionesCaja);
+        $volumenOcupado = 0;
+        $pesoTotal = 0;
+        $objetosEmpacados = [];
+        $objetosNoEmpacados = [];
+        $puntosOcupados = [];
+        $pesoMaximo = $caja['peso_maximo'];
+        $cajaId = $caja['id'];
+
+        // Convertir el carrito en un arreglo de objetos individuales
+        $objetos = [];
+        foreach ($carrito as $index => $producto) {
+            for ($i = 0; $i < $producto['cantidad']; $i++) {
+                $objetos[] = [
+                    'index' => $index,
+                    'ancho' => $producto['ancho'],
+                    'alto' => $producto['alto'],
+                    'largo' => $producto['largo'],
+                    'peso' => $producto['peso'],
+                    'producto_id' => $producto['id']
+                ];
+            }
+        }
+
+        // Ordenar objetos por volumen de mayor a menor
+        usort($objetos, function ($a, $b) {
+            $volumenA = $a['ancho'] * $a['alto'] * $a['largo'];
+            $volumenB = $b['ancho'] * $b['alto'] * $b['largo'];
+            return $volumenB <=> $volumenA;
+        });
+
+        // Intentar colocar cada objeto en la caja
+        foreach ($objetos as $objeto) {
+            $colocado = false;
+
+            if (($pesoTotal + $objeto['peso']) > $pesoMaximo) {
+                $objetosNoEmpacados[] = $objeto;
+                continue;
+            }
+
+            for ($x = 0; $x <= $dimensionesCaja[0] - $objeto['ancho']; $x++) {
+                for ($y = 0; $y <= $dimensionesCaja[1] - $objeto['alto']; $y++) {
+                    for ($z = 0; $z <= $dimensionesCaja[2] - $objeto['largo']; $z++) {
+                        if ($this->espacioDisponible($x, $y, $z, $objeto['ancho'], $objeto['alto'], $objeto['largo'], $puntosOcupados)) {
+                            $puntosOcupados[] = [$x, $y, $z, $objeto['ancho'], $objeto['alto'], $objeto['largo']];
+                            $objetosEmpacados[] = [
+                                'x' => $x,
+                                'y' => $y,
+                                'z' => $z,
+                                'ancho' => $objeto['ancho'],
+                                'alto' => $objeto['alto'],
+                                'largo' => $objeto['largo'],
+                                'peso' => $objeto['peso'],
+                                'producto_id' => $objeto['producto_id'],
+                                'id_caja' => $cajaId,
+                                //'numero_caja' => $numeroCaja
+                            ];
+                            $volumenOcupado += $objeto['ancho'] * $objeto['alto'] * $objeto['largo'];
+                            $pesoTotal += $objeto['peso'];
+                            $colocado = true;
+                            break 3;
+                        }
+                    }
+                }
+            }
+
+            if (!$colocado) {
+                $objetosNoEmpacados[] = $objeto;
+            }
+        }
+
+        $porcentajeUsado = $volumenCaja > 0 ? ($volumenOcupado / $volumenCaja) * 100 : 0;
+
+        return [
+            'id' => $cajaId,
+            'objetos_empacados' => $objetosEmpacados,
+            'objetos_no_empacados' => $objetosNoEmpacados,
+            'volumen_ocupado' => $volumenOcupado,
+            'volumen_caja' => $volumenCaja,
+            'porcentaje_usado' => $porcentajeUsado,
+            'peso_total' => $pesoTotal
+        ];
+    }
+
+
+    private function volumenTotal($caja)
+    {
+        return $caja[0] * $caja[1] * $caja[2];
+    }
+
+    private function espacioDisponible($x, $y, $z, $ancho, $alto, $largo, $puntosOcupados)
+    {
+        foreach ($puntosOcupados as $punto) {
+            list($ox, $oy, $oz, $ow, $oh, $od) = $punto;
+            if (!($x + $ancho <= $ox || $x >= $ox + $ow || $y + $alto <= $oy || $y >= $oy + $oh || $z + $largo <= $oz || $z >= $oz + $od)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    
 
     private function getOrCreateAddress(Request $request)
     {

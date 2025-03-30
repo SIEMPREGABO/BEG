@@ -410,7 +410,8 @@ class ClientController extends Controller
             $query = DB::table('material_product')
                 ->where('product_id', $request->product_id)
                 ->where('material_id', $request->material_id)
-                ->value('precio');
+                ->select('precio', 'ancho', 'alto', 'largo','peso')
+                ->first();
         }
 
         if ($request->has('material_id') && $request->has('endurance_id')) {
@@ -418,7 +419,8 @@ class ClientController extends Controller
                 ->where('product_id', $request->product_id)
                 ->where('material_id', $request->material_id)
                 ->where('endurance_id', $request->endurance_id)
-                ->value('precio');
+                ->select('precio', 'ancho', 'alto', 'largo','peso')
+                ->first();
         }
 
         if ($request->has('weight_id') && $request->has('length_id')) {
@@ -426,35 +428,40 @@ class ClientController extends Controller
                 ->where('product_id', $request->product_id)
                 ->where('weight_id', $request->weight_id)
                 ->where('length_id', $request->length_id)
-                ->value('precio');
+                ->select('precio', 'ancho', 'alto', 'largo','peso')
+                ->first();
         }
 
         if ($request->has('weight_id') && !$request->has('length_id')) {
             $query = DB::table('weight_product')
                 ->where('product_id', $request->product_id)
                 ->where('weight_id', $request->weight_id)
-                ->value('precio');
+                ->select('precio', 'ancho', 'alto', 'largo','peso')
+                ->first();
         }
 
         if ($request->has('length_id') && !$request->has('weight_id')) {
             $query = DB::table('length_product')
                 ->where('product_id', $request->product_id)
                 ->where('length_id', $request->length_id)
-                ->value('precio');
+                ->select('precio', 'ancho', 'alto', 'largo','peso')
+                ->first();
         }
 
         if ($request->has('size_id')) {
             $query = DB::table('size_product')
                 ->where('product_id', $request->product_id)
                 ->where('size_id', $request->size_id)
-                ->value('precio');
+                ->select('precio', 'ancho', 'alto', 'largo','peso')
+                ->first();
         }
 
         if ($request->has('wholesale_id')) {
             $query = DB::table('wholesale_product')
                 ->where('product_id', $request->product_id)
                 ->where('wholesale_id', $request->wholesale_id)
-                ->value('precio');
+                ->select('precio', 'ancho', 'alto', 'largo','peso')
+                ->first();
         }
 
 

@@ -16,6 +16,10 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->foreignId('weight_id')->constrained()->onDelete('cascade');
             $table->foreignId('length_id')->constrained()->onDelete('cascade');
+            $table->float('ancho')->nullable();
+            $table->float('alto')->nullable();
+            $table->float('largo')->nullable();
+            $table->float('peso')->nullable();
             $table->float('precio');
         });
     }

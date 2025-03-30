@@ -46,6 +46,10 @@ function getPrice() {
             } else {
                 document.getElementById('price').innerText = `$${data.price}`;
                 document.getElementById('precio').value = `${data.price}`;
+                document.getElementById('ancho').value = `${data.ancho}`;
+                document.getElementById('alto').value = `${data.alto}`;
+                document.getElementById('largo').value = `${data.largo}`;
+                document.getElementById('peso').value = `${data.peso}`;
                 document.getElementById('submitButton').removeAttribute('disabled');
             }
 

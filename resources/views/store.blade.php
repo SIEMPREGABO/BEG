@@ -167,6 +167,14 @@
                                                     value="{{ $producto->nombre }}">
                                                 <input type="hidden" id="slug" name="slug"
                                                     value="{{ $producto->slug }}">
+                                                <input type="hidden" id="ancho" name="ancho"
+                                                    value="{{ $producto->ancho }}">
+                                                <input type="hidden" id="alto" name="alto"
+                                                    value="{{ $producto->alto }}">
+                                                <input type="hidden" id="largo" name="largo"
+                                                    value="{{ $producto->largo }}">
+                                                <input type="hidden" id="peso" name="peso"
+                                                    value="{{ $producto->peso }}">
                                                 <input type="hidden" id="precio" name="precio"
                                                     value="{{ $producto->precio }}">
                                                 <div class="flex items-center mb-4">

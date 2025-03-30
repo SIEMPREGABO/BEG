@@ -20,6 +20,10 @@ return new class extends Migration
             $table->float('precio_mayoreo')->nullable();
             $table->boolean('variante')->default(0);
             $table->foreignId('category_id')->constrained('categories');
+            $table->float('ancho')->nullable();
+            $table->float('alto')->nullable();
+            $table->float('largo')->nullable();
+            $table->float('peso')->nullable();
         });
     }
 

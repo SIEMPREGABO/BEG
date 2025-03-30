@@ -33,6 +33,11 @@
                             <input type="hidden" id="nombre" name="nombre" value="{{ $product->nombre }}">
                             <input type="hidden" id="slug" name="slug" value="{{ $product->slug }}">
                             <input type="hidden" id="category" name="category" value="{{ $product->category_id }}">
+                            <input type="hidden" id="ancho" name="ancho" value="{{ $product->ancho }}">
+                            <input type="hidden" id="alto" name="alto" value="{{ $product->alto }}">
+                            <input type="hidden" id="largo" name="largo" value="{{ $product->largo }}">
+                            <input type="hidden" id="peso" name="peso" value="{{ $product->peso }}">
+
                             <div class="text-xl font-semibold mb-2 text-gray-500 dark:text-gray-300">
                                 <p id="price" name="price" class="m-4 text-xl md:text-3xl">$
                                     @if ($product->variante)
