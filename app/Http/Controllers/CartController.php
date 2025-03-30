@@ -272,7 +272,7 @@ class CartController extends Controller
             }
         }
 
-        dd($carrito);
+        //dd($carrito);
         Session::put('carrito', $carrito);
         return redirect()->back();
     }
@@ -389,7 +389,10 @@ class CartController extends Controller
 
         $this->getOrCreateAddress($request);
         $subtotal = $this->getSubtotal();
-        $envio = $this->getDelivery($carrito);
+
+        $empaquetadoController = new EmpaquetadoController();
+        $envio = $empaquetadoController->calcularEmpaquetadoOptimo($carrito);
+        //$envio = $this->getDelivery($carrito);
         $descuentoTotal = 0;
         $total = 0;
 
@@ -892,7 +895,7 @@ class CartController extends Controller
         foreach ($carrito as $producto) {
             for ($i = 0; $i < $producto['cantidad']; $i++) {
                 $objetosPorEmpacar[] = [
-                    
+
                     $producto['ancho'],
                     $producto['alto'],
                     $producto['largo'],
