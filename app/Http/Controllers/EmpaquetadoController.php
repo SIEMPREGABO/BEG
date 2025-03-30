@@ -126,7 +126,7 @@ class EmpaquetadoController extends Controller
         // 1. Inicialización de variables
         //dd('pase');
         $volumenCaja = $this->calcularVolumen($caja);
-        dd('pase el volumen');
+        //dd('pase el volumen');
         $volumenOcupado = 0;
         $pesoTotal = 0;
         $objetosEmpacados = [];
@@ -139,6 +139,8 @@ class EmpaquetadoController extends Controller
             $volumenB = $b['ancho'] * $b['alto'] * $b['largo'];
             return $volumenB <=> $volumenA;
         });
+
+        dd($objetos);
 
         // 3. Algoritmo de empaquetado 3D
         foreach ($objetos as $objeto) {
