@@ -46,7 +46,7 @@ class EmpaquetadoController extends Controller
                 break; // No hay cajas que puedan contener los objetos restantes
             }
         }
-
+        dd($mejorCaja);
         return $precioTotal;
 
 
@@ -196,7 +196,7 @@ class EmpaquetadoController extends Controller
                 $objetosNoEmpacados[] = $objeto;
             }
         }
-        dd($objetosEmpacados);
+       
         // 4. Calcular métricas finales
         $porcentajeUsado = $volumenCaja > 0 ? ($volumenOcupado / $volumenCaja) * 100 : 0;
 
