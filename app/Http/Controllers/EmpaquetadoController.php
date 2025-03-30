@@ -48,11 +48,6 @@ class EmpaquetadoController extends Controller
         }
         dd($mejorCaja);
         return $precioTotal;
-
-
-
-
-
         /*$cajasDisponibles = Caja::orderBy('precio')->get()->toArray();
         $objetosPorEmpacar = $this->convertirCarritoAObjetos($carrito);
         $resultado = [
