@@ -389,7 +389,7 @@ class CartController extends Controller
 
         $this->getOrCreateAddress($request);
         $subtotal = $this->getSubtotal();
-        dd($subtotal);
+    //dd($subtotal);
         $empaquetadoController = new EmpaquetadoController();
         $envio = $empaquetadoController->calcularEmpaquetadoOptimo($carrito);
         //$envio = $this->getDelivery($carrito);

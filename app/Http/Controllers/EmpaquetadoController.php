@@ -14,10 +14,10 @@ class EmpaquetadoController extends Controller
     {
 
         $cajas = Caja::orderBy('precio')->get()->toArray();
-
+        dd($cajas);
 
         $objetosPorEmpacar = $this->convertirCarritoAObjetos($carrito);
-
+        dd($objetosPorEmpacar);
         $precioTotal = 0;
 
         $maxiteraciones = 100;
