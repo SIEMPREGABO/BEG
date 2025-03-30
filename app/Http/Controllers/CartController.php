@@ -272,7 +272,7 @@ class CartController extends Controller
             }
         }
 
-
+        dd($carrito);
         Session::put('carrito', $carrito);
         return redirect()->back();
     }
@@ -1052,7 +1052,7 @@ class CartController extends Controller
         return true;
     }
 
-    
+
 
     private function getOrCreateAddress(Request $request)
     {
