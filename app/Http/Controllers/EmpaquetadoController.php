@@ -29,8 +29,8 @@ class EmpaquetadoController extends Controller
             $maxPorcentaje = 0;
 
             foreach ($cajas as $caja) {
-                dd($caja);
-                $resultado = $this->empacarObjetos($caja['dimensiones'], $objetosPorEmpacar, $caja);
+                //dd($caja);
+                $resultado = $this->empacarObjetos( $objetosPorEmpacar, $caja);
 
                 if ($resultado['porcentaje_usado'] > $maxPorcentaje) {
                     $maxPorcentaje = $resultado['porcentaje_usado'];
@@ -121,11 +121,11 @@ class EmpaquetadoController extends Controller
         return $mejorCaja;
     }*/
 
-    private function empacarObjetos(array $dimensionesCaja, array $objetos, array $caja): array
+    private function empacarObjetos( array $objetos, array $caja): array
     {
         // 1. Inicialización de variables
-        dd('pase');
-        $volumenCaja = $this->calcularVolumen($dimensionesCaja);
+        //dd('pase');
+        $volumenCaja = $this->calcularVolumen($caja);
         dd('pase el volumen');
         $volumenOcupado = 0;
         $pesoTotal = 0;
@@ -151,9 +151,9 @@ class EmpaquetadoController extends Controller
             $empacado = false;
 
             // Buscar posición en 3D (x, y, z)
-            for ($x = 0; $x <= $dimensionesCaja[0] - $objeto['ancho']; $x++) {
-                for ($y = 0; $y <= $dimensionesCaja[1] - $objeto['alto']; $y++) {
-                    for ($z = 0; $z <= $dimensionesCaja[2] - $objeto['largo']; $z++) {
+            for ($x = 0; $x <= $caja['ancho'] - $objeto['ancho']; $x++) {
+                for ($y = 0; $y <= $caja['alto'] - $objeto['alto']; $y++) {
+                    for ($z = 0; $z <= $caja['largo'] - $objeto['largo']; $z++) {
 
                         // Verificar colisión con objetos ya empacados
                         if ($this->espacioDisponible($x, $y, $z, $objeto['ancho'], $objeto['alto'], $objeto['largo'], $puntosOcupados)) {
@@ -213,9 +213,9 @@ class EmpaquetadoController extends Controller
     /**
      * Calcula el volumen de una caja
      */
-    private function calcularVolumen(array $dimensiones): float
+    private function calcularVolumen( $caja): float
     {
-        return $dimensiones[0] * $dimensiones[1] * $dimensiones[2];
+        return $caja['ancho'] * $caja['alto'] * $caja['largo'];
     }
 
     /**
