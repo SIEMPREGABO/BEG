@@ -46,7 +46,7 @@ class EmpaquetadoController extends Controller
                 break; // No hay cajas que puedan contener los objetos restantes
             }
         }
-        dd($mejorCaja);
+        dd($precioTotal,$resultado);
         return $precioTotal;
         /*$cajasDisponibles = Caja::orderBy('precio')->get()->toArray();
         $objetosPorEmpacar = $this->convertirCarritoAObjetos($carrito);
