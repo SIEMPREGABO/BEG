@@ -17,7 +17,7 @@ class EmpaquetadoController extends Controller
         //dd($cajas);
 
         $objetosPorEmpacar = $this->convertirCarritoAObjetos($carrito);
-        dd($objetosPorEmpacar);
+        //dd($objetosPorEmpacar);
         $precioTotal = 0;
 
         $maxiteraciones = 100;
@@ -123,7 +123,9 @@ class EmpaquetadoController extends Controller
     private function empacarObjetos(array $dimensionesCaja, array $objetos, array $caja): array
     {
         // 1. Inicialización de variables
+        dd('pase');
         $volumenCaja = $this->calcularVolumen($dimensionesCaja);
+        dd('pase el volumen');
         $volumenOcupado = 0;
         $pesoTotal = 0;
         $objetosEmpacados = [];
