@@ -140,7 +140,7 @@ class EmpaquetadoController extends Controller
             return $volumenB <=> $volumenA;
         });
 
-        dd($objetos);
+        //dd($objetos);
 
         // 3. Algoritmo de empaquetado 3D
         foreach ($objetos as $objeto) {
@@ -196,7 +196,7 @@ class EmpaquetadoController extends Controller
                 $objetosNoEmpacados[] = $objeto;
             }
         }
-
+        dd($objetosEmpacados);
         // 4. Calcular métricas finales
         $porcentajeUsado = $volumenCaja > 0 ? ($volumenOcupado / $volumenCaja) * 100 : 0;
 
