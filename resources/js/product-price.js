@@ -40,6 +40,7 @@ function getPrice() {
             response => response.json()
         )
         .then(data => {
+            console.log(data);
             if (data.price === null) {
                 document.getElementById('price').innerText = `$ - `;
                 document.getElementById('submitButton').setAttribute('disabled','disabled');
