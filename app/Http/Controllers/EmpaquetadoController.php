@@ -29,7 +29,7 @@ class EmpaquetadoController extends Controller
             $maxPorcentaje = 0;
 
             foreach ($cajas as $caja) {
-                //dd($caja);
+
                 $resultado = $this->empacarObjetos($objetosPorEmpacar, $caja);
 
                 if ($resultado['porcentaje_usado'] > $maxPorcentaje) {
@@ -46,7 +46,7 @@ class EmpaquetadoController extends Controller
                 break; // No hay cajas que puedan contener los objetos restantes
             }
         }
-        dd($precioTotal, $mejorCaja,$mejorResultado);
+        //dd($precioTotal, $mejorCaja,$mejorResultado);
         return $precioTotal;
         /*$cajasDisponibles = Caja::orderBy('precio')->get()->toArray();
         $objetosPorEmpacar = $this->convertirCarritoAObjetos($carrito);
