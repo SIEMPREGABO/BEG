@@ -20,7 +20,7 @@ class EmpaquetadoController extends Controller
         //dd($objetosPorEmpacar);
         $precioTotal = 0;
 
-        $maxiteraciones = 100;
+        $maxiteraciones = 200;
         $i = 0;
 
         while (!empty($objetosPorEmpacar) && $i++ < $maxiteraciones) {
@@ -48,28 +48,7 @@ class EmpaquetadoController extends Controller
         }
         //dd($precioTotal, $mejorCaja,$mejorResultado);
         return $precioTotal;
-        /*$cajasDisponibles = Caja::orderBy('precio')->get()->toArray();
-        $objetosPorEmpacar = $this->convertirCarritoAObjetos($carrito);
-        $resultado = [
-            'precio_total_envio' => 0,
-            'cajas_utilizadas' => [],
-            'productos_sin_empaquetar' => []
-        ];
-
-        while (!empty($objetosPorEmpacar)) {
-            $mejorCaja = $this->encontrarMejorCaja($cajasDisponibles, $objetosPorEmpacar);
-
-            if (!$mejorCaja) {
-                $resultado['productos_sin_empaquetar'] = $objetosPorEmpacar;
-                break;
-            }
-
-            $resultado['precio_total_envio'] += $mejorCaja['caja']['precio'];
-            $resultado['cajas_utilizadas'][] = $mejorCaja;
-            $objetosPorEmpacar = $mejorCaja['objetos_no_empacados'];
-        }
-
-        return $resultado['precio_total_envio'];*/
+        
     }
 
     private function convertirCarritoAObjetos(array $carrito): array
