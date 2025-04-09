@@ -168,7 +168,7 @@
                             })
                             .then(response => response.json())
                             .then(data => {
-                                //console.log(data);
+                                console.log(data);
                                 if (data.success) {
                                     //console.log(data.token);
                                     // Redirige a una ruta específica cuando la respuesta sea exitosa

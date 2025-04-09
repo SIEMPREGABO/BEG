@@ -20,10 +20,10 @@ class EmpaquetadoController extends Controller
         //dd($objetosPorEmpacar);
         $precioTotal = 0;
 
-        $maxiteraciones = 200;
+        //s$maxiteraciones = 200;
         $i = 0;
 
-        while (!empty($objetosPorEmpacar) && $i++ < $maxiteraciones) {
+        while (!empty($objetosPorEmpacar) ) {
             $mejorCaja = null;
             $mejorResultado = null;
             $maxPorcentaje = 0;
@@ -48,9 +48,10 @@ class EmpaquetadoController extends Controller
         }
         //dd($precioTotal, $mejorCaja,$mejorResultado);
         return $precioTotal;
-        
     }
 
+
+    
     private function convertirCarritoAObjetos(array $carrito): array
     {
         $objetos = [];
@@ -71,28 +72,6 @@ class EmpaquetadoController extends Controller
         }
         return $objetos;
     }
-
-    /*private function encontrarMejorCaja(array $cajasDisponibles, array $objetos): ?array
-    {
-        $mejorCaja = null;
-        $maxPorcentaje = 0;
-
-        foreach ($cajasDisponibles as $caja) {
-            $resultado = $this->empacarObjetos($caja, $objetos);
-
-            if ($resultado['porcentaje_usado'] > $maxPorcentaje) {
-                $maxPorcentaje = $resultado['porcentaje_usado'];
-                $mejorCaja = [
-                    'caja' => $caja,
-                    'objetos_empacados' => $resultado['objetos_empacados'],
-                    'objetos_no_empacados' => $resultado['objetos_no_empacados'],
-                    'porcentaje_usado' => $resultado['porcentaje_usado']
-                ];
-            }
-        }
-
-        return $mejorCaja;
-    }*/
 
 
     private function generarRotaciones(array $objeto): array

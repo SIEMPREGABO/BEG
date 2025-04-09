@@ -382,16 +382,16 @@ class CartController extends Controller
     {
 
         $carrito = Session::get('carrito', []);
-
+        $envio = 0;
         if (empty($carrito)) {
             return redirect()->route('Home');
         }
 
         $this->getOrCreateAddress($request);
         $subtotal = $this->getSubtotal();
-    //dd($subtotal);
+        //dd($subtotal);
         $empaquetadoController = new EmpaquetadoController();
-        $envio = $empaquetadoController->calcularEmpaquetadoOptimo($carrito);
+        //$envio = $empaquetadoController->calcularEmpaquetadoOptimo($carrito);
         //$envio = $this->getDelivery($carrito);
         $descuentoTotal = 0;
         $total = 0;
@@ -449,6 +449,16 @@ class CartController extends Controller
         $carrito = Session::get('carrito', []);
         //$address = Session
         $costoFijoPrueba = 10;
+        $subtotal = $this->getSubtotal();
+        //$envio = $this->getDelivery($carrito);
+        $descuentoTotal = 0;
+        $codigo = Session::get('code');
+        if ($codigo) {
+            $descuentoTotal = $this->getDescuento($codigo);
+            $descuentoTotal += $this->getDescuentoIVA();
+        }
+
+        $total = $subtotal + $descuentoTotal;
 
         if (empty($carrito)) {
             return redirect()->route('Home');
@@ -531,17 +541,19 @@ class CartController extends Controller
                 DB::beginTransaction();
                 try {
                     $subtotal = $this->getSubtotal();
-                    $envio = $this->getDelivery($carrito);
+                    //$envio = $this->getDelivery($carrito);
                     $descuentoTotal = $this->getDescuento($codigo);
                     $descuentoTotal += $this->getDescuentoIVA();
-                    $costoTotalEnvio = $envio['costo_total_envio'];
-                    $detallesEnvio = $envio['detalles_envio'];
+                    //$costoTotalEnvio = $envio['costo_total_envio'];
+                    //$detallesEnvio = $envio['detalles_envio'];
+                    $costoTotalEnvio = 0;
+                    //$detallesEnvio = ;
 
-                    foreach ($detallesEnvio as $detalle) {
-                        if ($detalle['proveedor'] === null) {
-                            $costoTotalEnvio = 0;
-                        }
-                    }
+                    //foreach ($detallesEnvio as $detalle) {
+                    //    if ($detalle['proveedor'] === null) {
+                    //        $costoTotalEnvio = 0;
+                    //    }
+                    //}
 
                     $total = $subtotal - $descuentoTotal + $costoTotalEnvio;
 
@@ -655,12 +667,13 @@ class CartController extends Controller
                         $detail = new Detail();
                         $detail->product_id = $producto['id'];
                         $detail->order_id = $order->id;
-                        $detail->costo_envio = $producto['precio_envio'];
-                        if ($producto['proveedor'] === null) {
-                            $detail->proveedor = 'Buscar proveedor';
-                        } else {
-                            $detail->proveedor = $producto['proveedor'];
-                        }
+                        //$detail->costo_envio = $producto['precio_envio'];
+                        $detail->costo_envio = 0;
+                        //if ($producto['proveedor'] === null) {
+                        $detail->proveedor = 'Buscar proveedor';
+                        //} else {
+                        //    $detail->proveedor = $producto['proveedor'];
+                        //}
 
                         $detail->quantity = $producto['cantidad'];
                         $detail->total = $producto['cantidad'] * $producto['precio'];
