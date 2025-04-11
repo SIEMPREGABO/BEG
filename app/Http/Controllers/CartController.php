@@ -390,7 +390,7 @@ class CartController extends Controller
         $this->getOrCreateAddress($request);
         $subtotal = $this->getSubtotal();
         //dd($subtotal);
-        $empaquetadoController = new EmpaquetadoController();
+        //$empaquetadoController = new EmpaquetadoController();
         //$envio = $empaquetadoController->calcularEmpaquetadoOptimo($carrito);
         //$envio = $this->getDelivery($carrito);
         $descuentoTotal = 0;
@@ -408,16 +408,16 @@ class CartController extends Controller
         }
 
         $descuentoTotal += $this->getDescuentoIVA();
+        $costoTotalEnvio = 0;
+        //$costoTotalEnvio = $envio['costo_total_envio'];
+        //$detallesEnvio = $envio['detalles_envio'];
 
-        $costoTotalEnvio = $envio['costo_total_envio'];
-        $detallesEnvio = $envio['detalles_envio'];
 
-
-        foreach ($detallesEnvio as $detalle) {
+        /*foreach ($detallesEnvio as $detalle) {
             if ($detalle['proveedor'] === null) {
                 $costoTotalEnvio = 0;
             }
-        }
+        }*/
 
         $total = $subtotal - $descuentoTotal + $costoTotalEnvio;
 
