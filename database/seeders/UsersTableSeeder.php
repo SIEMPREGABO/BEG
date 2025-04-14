@@ -25,7 +25,7 @@ class UsersTableSeeder extends Seeder
         $clienteprueba->apellido_materno = 'Arevalo';
         $clienteprueba->celular = '5510316739';
         $clienteprueba->email_verified_at = null; // Verifica que este sea el nombre correcto del campo
-        $clienteprueba->password = Hash::make('12345678'); // Encripta la contraseña
+        $clienteprueba->password = Hash::make('AdministradorBEG#01'); // Encripta la contraseña
         //dd($clienteprueba->CONTRASENIA);
         $clienteprueba->remember_token = Str::random(10);
         $clienteprueba->isAdmin = true;
