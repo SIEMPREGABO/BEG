@@ -448,7 +448,7 @@ class CartController extends Controller
     {
         $carrito = Session::get('carrito', []);
         //$address = Session
-        $costoFijoPrueba = 10;
+        //$costoFijoPrueba = 10;
         $subtotal = $this->getSubtotal();
         //$envio = $this->getDelivery($carrito);
         $descuentoTotal = 0;
@@ -475,7 +475,7 @@ class CartController extends Controller
                 "token" => $request->token,
                 "issuer_id" => $request->issuer_id,
                 "payment_method_id" => $request->payment_method_id,
-                "transaction_amount" => $costoFijoPrueba,
+                "transaction_amount" => $total,
                 "installments" => $request->installments,
                 "payer" => [
                     "email" => $request->payer['email'],
