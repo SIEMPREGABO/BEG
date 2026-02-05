@@ -15,7 +15,9 @@
             $textcolor = '';
             $buttonColor = ''; 
             $carouselButtonClass = '';
-            switch ($category?->slug) {
+            $categorySlug = $category ? $category->slug : null;
+
+            switch ($categorySlug) {
                 case 'Ligas':
                     $clase = 'green-theme';
                     $textcolor = 'color-green';

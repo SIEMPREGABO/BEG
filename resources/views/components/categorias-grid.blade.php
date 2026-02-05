@@ -10,8 +10,10 @@
 
             // if($categorias) {
             $clase = '';
+            $categorySlug = $category ? $category->slug : null;
 
-            switch ($category?->slug) {
+
+            switch ($categorySlug) {
                 case 'Ligas':
                     $clase = 'border-neon-green box-shadow-neon-green';
                     break;
