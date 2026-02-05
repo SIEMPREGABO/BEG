@@ -4,11 +4,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const button = document.getElementById('addDirectionButton');
     const menu = document.getElementById('addDirection');
 
-    button.addEventListener('click', function () {
-        if (menu.classList.contains('hidden')) {
-            menu.classList.remove('hidden');
-        }
-    });
+    if (button && menu) {
+        button.addEventListener('click', function () {
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            }
+        });
+    }
 });
 
 function openEditModalAddress(addressId, estado, municipio, colonia, cp, calle, num_ext, num_int) {

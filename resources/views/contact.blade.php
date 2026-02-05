@@ -1,350 +1,245 @@
 @section('name', 'Contacto')
 
 <x-app-layout>
-    @if ($errors->any())
-        <div class=" sm:px-6 lg:px-8 xl:mx-40  lg:mx-10">
-            <ul class="mt-8 sm:mx-auto sm:w-full sm:max-w-6xl">
-                @foreach ($errors->all() as $error)
-                    <div class="rounded-md flex m-2 items-center bg-blue-500 text-white text-sm font-bold px-4 py-1"
-                        role="alert">
-                        <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path
-                                d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z" />
-                        </svg>
-                        <p>{{ $error }}</p>
-                    </div>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    @if (session('success'))
-        <div class=" sm:px-6 lg:px-8 xl:mx-40  lg:mx-10" id="success-message">
-            <div class=" mt-8 sm:mx-auto sm:w-full sm:max-w-6xl">
-                <div class="rounded-md flex m-2 items-center bg-green-500 text-white text-sm font-bold px-4 py-1"
-                    role="alert">
-                    <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path
-                            d="M10 0C4.477 0 0 4.477 0 10s4.477 10 10 10 10-4.477 10-10S15.523 0 10 0zM7.146 13.854l-4.146-4.146a1 1 0 111.414-1.414L7 11.086l7.086-7.086a1 1 0 111.414 1.414l-8 8a1 1 0 01-1.414 0z" />
-                    </svg>
-                    <p>{{ session('success') }}</p>
+    <x-alert-messages />
+    <div class="container mx-auto pt-10 md:pt-10 px-4">
+        <div class="shadow-sm">
+            <!-- Nuestra Historia -->
+            <section class="w-full flex flex-col items-center pt-5">
+                <div class="mx-auto my-2 items-center">
+                    <h1 class="h1-neon text-center">Nuestra Historia</h1>
                 </div>
-            </div>
-        </div>
-    @endif
-    <div class=" container mx-auto  pt-16 md:pt-36 ">
-        <div class=" shadow-sm  ">
-            <section class="w-full flex flex-col items-center pt-5 ">
-                <div
-                    class=" mx-auto my-2 items-center text-gray-200 no-underline hover:no-underline font-bold text-2xl lg:text-5xl">
-                    <span
-                        class="bg-clip-text uppercase text-transparent bg-gradient-to-r from-blue-400 via-pink-500 to-purple-500">
-                        Nuestra historia
-                    </span>
-                </div>
-
-
-                <div class="w-full">
-                    <article class="flex flex-col px-5 md:px-0 my-4">
-                        <p>Fundada el 9 de abril del 2015 a partir de una idea de crear diferentes variantes con
-                            implementos en el entrenamiento deportivo.</p>
+                <div class="w-full max-w-4xl">
+                    <article class="flex flex-col px-5 md:px-8 my-6">
+                        <p class="text-white-neon text-center text-lg md:text-xl leading-relaxed">
+                            Fundada el 9 de abril del 2015 a partir de una idea de crear diferentes variantes con
+                            implementos en el entrenamiento deportivo.
+                        </p>
                     </article>
                 </div>
             </section>
 
-            <div class="md:flex-row flex w-full pt-10">
-                <div class="mx-auto flex flex-wrap">
-                    <section class="w-full flex flex-col items-center pt-5 lg:w-1/2">
-                        <div
-                            class=" mx-auto my-2 items-center text-gray-200 no-underline hover:no-underline font-bold text-2xl lg:text-5xl">
-                            <span
-                                class="bg-clip-text uppercase text-transparent bg-gradient-to-r from-blue-400 via-pink-500 to-purple-500">
-                                vision
-                            </span>
-                        </div>
+            <!-- Visión y Misión -->
+            <div class="flex flex-col md:flex-row w-full pt-10 gap-6 px-4 max-w-7xl mx-auto">
+                <!-- Visión -->
+                <section class="w-full lg:w-1/2 flex flex-col">
+                    <div class="border-neon-cyan box-shadow-neon-cyan rounded-lg p-6 md:p-8 bg-black bg-opacity-60 h-full">
+                        <h2 class="color-cyan text-center mb-6 text-3xl md:text-4xl uppercase" style="text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);">Visión</h2>
                         <div class="w-full">
-                            <article class="flex flex-col px-5 md:px-0 my-4">
-                                <p>La visión de nuestra empresa es ser lideres en equipo para gimnasio, brindando equipo
-                                    de excelente calidad y accesible para el público.</p>
+                            <article class="flex flex-col">
+                                <p class="subtitle-neon text-center leading-relaxed">
+                                    La visión de nuestra empresa es ser líderes en equipo para gimnasio, brindando equipo
+                                    de excelente calidad y accesible para el público.
+                                </p>
                             </article>
                         </div>
-                    </section>
-                    <section class="w-full flex flex-col items-center pt-5 lg:w-1/2">
-                        <div
-                            class=" mx-auto my-2 items-center text-gray-200 no-underline hover:no-underline font-bold text-2xl lg:text-5xl">
-                            <span
-                                class="bg-clip-text uppercase text-transparent bg-gradient-to-r from-blue-400 via-pink-500 to-purple-500">
-                                mision
-                            </span>
-                        </div>
+                    </div>
+                </section>
+
+                <!-- Misión -->
+                <section class="w-full lg:w-1/2 flex flex-col">
+                    <div class="border-neon-purple box-shadow-neon-purple rounded-lg p-6 md:p-8 bg-black bg-opacity-60 h-full">
+                        <h2 class="color-purple text-center mb-6 text-3xl md:text-4xl uppercase" style="text-shadow: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-purple);">Misión</h2>
                         <div class="w-full">
-                            <article class="flex flex-col px-5 md:px-0 my-4">
-                                <p>La mision de la empresa es promover un equipo funcional y seguro donde el consumidor
-                                    quede satisfecho en cada entrenamiento.</p>
+                            <article class="flex flex-col">
+                                <p class="subtitle-neon text-center leading-relaxed">
+                                    La misión de la empresa es promover un equipo funcional y seguro donde el consumidor
+                                    quede satisfecho en cada entrenamiento.
+                                </p>
                             </article>
                         </div>
-                    </section>
-                </div>
+                    </div>
+                </section>
             </div>
 
 
-            <div class=" w-full flex flex-col items-center pt-16 ">
-                <div
-                    class=" mx-auto  items-center text-gray-200 no-underline hover:no-underline font-bold text-2xl lg:text-5xl">
-                    <span
-                        class="bg-clip-text uppercase text-transparent bg-gradient-to-r from-blue-400 via-pink-500 to-purple-500">
-                        Contáctanos
-                    </span>
+            <!-- Contáctanos -->
+            <div class="w-full flex flex-col items-center pt-16">
+                <div class="mx-auto items-center mb-10">
+                    <h1 class="h1-neon text-center">Contáctanos</h1>
                 </div>
-                <div class="mx-auto flex flex-wrap text-xs font-bold text-black uppercase no-underline my-10">
-                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://www.facebook.com/share/15vYQ1FjNP/">
-                        <div class="flex md:justify-end justify-center items-center rounded-lg px-10">
-                            <div
-                                class="flex items-center hover:bg-blue-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
-                                <i class="fab fa-facebook rounded p-4 fa-10x"></i>
-                                <p class="text-xl">Erick Marci</p>
-                            </div>
-                        </div>
+                
+                <!-- Grid de Contactos -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl px-4 mb-12"
+                    style="gap: 20px">
+                    <!-- Erick Marci -->
+                    <a href="https://www.facebook.com/share/15vYQ1FjNP/" 
+                       class="border-neon-blue box-shadow-neon-blue rounded-lg p-4 bg-black bg-opacity-60 zoom-button flex items-center gap-4">
+                        <i class="fab fa-facebook text-4xl color-blue"></i>
+                        <span class="text-white-neon text-lg">Erick Marci</span>
+                    </a>
+                    <a href="https://wa.me/message/H7XD6PXHVY23P1" 
+                       class="border-neon-green box-shadow-neon-green rounded-lg p-4 bg-black bg-opacity-60 zoom-button flex items-center gap-4">
+                        <i class="fab fa-whatsapp text-4xl color-green"></i>
+                        <span class="text-white-neon text-lg">Erick Marci</span>
                     </a>
 
-                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://wa.me/message/H7XD6PXHVY23P1">
-                        <div class="flex md:justify-start justify-center items-center rounded-lg px-10">
-                            <div
-                                class="flex items-center hover:bg-green-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
-                                <i class="fab fa-whatsapp rounded p-4 fa-10x "></i>
-                                <p class="text-xl">Erick Marci</p>
-                            </div>
-                        </div>
+                    <!-- Dany Marci -->
+                    <a href="https://www.facebook.com/share/18ALwbQ51S/?mibextid=qi2Omg" 
+                       class="border-neon-blue box-shadow-neon-blue rounded-lg p-4 bg-black bg-opacity-60 zoom-button flex items-center gap-4">
+                        <i class="fab fa-facebook text-4xl color-blue"></i>
+                        <span class="text-white-neon text-lg">Dany Marci</span>
                     </a>
-                    <!--<i class="fab fa-whatsapp rounded p-4 fa-10x bg-gradient-to-r hover:text-white from-purple-800 to-blue-600 hover:from-pink-500 hover:to-purple-500 "></i>-->
-                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2"
-                        href="https://www.facebook.com/share/18ALwbQ51S/?mibextid=qi2Omg">
-                        <div class="flex md:justify-end justify-center items-center rounded-lg px-10">
-                            <div
-                                class="flex items-center hover:bg-blue-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
-                                <i class="fab fa-facebook rounded p-4 fa-10x"></i>
-                                <p class="text-xl">Dany Marci</p>
-                            </div>
-                        </div>
+                    <a href="https://wa.me/message/IXR6FQDPKWYFH1" 
+                       class="border-neon-green box-shadow-neon-green rounded-lg p-4 bg-black bg-opacity-60 zoom-button flex items-center gap-4">
+                        <i class="fab fa-whatsapp text-4xl color-green"></i>
+                        <span class="text-white-neon text-lg">Dany Marci</span>
                     </a>
 
-                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://wa.me/message/IXR6FQDPKWYFH1">
-                        <div class="flex md:justify-start justify-center items-center rounded-lg px-10">
-                            <div
-                                class="flex items-center hover:bg-green-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
-                                <i class="fab fa-whatsapp rounded p-4 fa-10x"></i>
-                                <p class="text-xl">Dany Marci</p>
-                            </div>
-                        </div>
+                    <!-- Carla Marci -->
+                    <a href="https://www.facebook.com/carla.marci.18?mibextid=ZbWKwL" 
+                       class="border-neon-blue box-shadow-neon-blue rounded-lg p-4 bg-black bg-opacity-60 zoom-button flex items-center gap-4">
+                        <i class="fab fa-facebook text-4xl color-blue"></i>
+                        <span class="text-white-neon text-lg">Carla Marci</span>
+                    </a>
+                    <a href="https://wa.me/message/VACJ6VYXDKZ4G1" 
+                       class="border-neon-green box-shadow-neon-green rounded-lg p-4 bg-black bg-opacity-60 zoom-button flex items-center gap-4">
+                        <i class="fab fa-whatsapp text-4xl color-green"></i>
+                        <span class="text-white-neon text-lg">Carla Marci</span>
                     </a>
 
-                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2"
-                        href="https://www.facebook.com/carla.marci.18?mibextid=ZbWKwL">
-                        <div class="flex md:justify-end justify-center items-center rounded-lg px-10">
-                            <div
-                                class="flex items-center hover:bg-blue-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
-                                <i class="fab fa-facebook rounded p-4 fa-10x"></i>
-                                <p class="text-xl">Carla Marci</p>
-                            </div>
-                        </div>
+                    <!-- Johana Marci -->
+                    <a href="https://www.facebook.com/profile.php?id=100011259979300&mibextid=ZbWKwL" 
+                       class="border-neon-blue box-shadow-neon-blue rounded-lg p-4 bg-black bg-opacity-60 zoom-button flex items-center gap-4">
+                        <i class="fab fa-facebook text-4xl color-blue"></i>
+                        <span class="text-white-neon text-lg">Johana Marci</span>
+                    </a>
+                    <a href="https://wa.me/qr/HABYSTIDJUXIB1" 
+                       class="border-neon-green box-shadow-neon-green rounded-lg p-4 bg-black bg-opacity-60 zoom-button flex items-center gap-4">
+                        <i class="fab fa-whatsapp text-4xl color-green"></i>
+                        <span class="text-white-neon text-lg">Johana Marci</span>
                     </a>
 
-                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://wa.me/message/VACJ6VYXDKZ4G1">
-                        <div class="flex md:justify-start justify-center items-center rounded-lg px-10">
-                            <div
-                                class="flex items-center hover:bg-green-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
-                                <i class="fab fa-whatsapp rounded p-4 fa-10x"></i>
-                                <p class="text-xl">Carla Marci</p>
-                            </div>
-                        </div>
+                    <!-- Paola Marci -->
+                    <a href="https://www.facebook.com/share/1AozV1ivFs/" 
+                       class="border-neon-blue box-shadow-neon-blue rounded-lg p-4 bg-black bg-opacity-60 zoom-button flex items-center gap-4">
+                        <i class="fab fa-facebook text-4xl color-blue"></i>
+                        <span class="text-white-neon text-lg">Paola Marci</span>
+                    </a>
+                    <a href="https://wa.me/message/NP4ZDJIR5GZTF1" 
+                       class="border-neon-green box-shadow-neon-green rounded-lg p-4 bg-black bg-opacity-60 zoom-button flex items-center gap-4">
+                        <i class="fab fa-whatsapp text-4xl color-green"></i>
+                        <span class="text-white-neon text-lg">Paola Marci</span>
                     </a>
 
-                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2"
-                        href="https://www.facebook.com/profile.php?id=100011259979300&mibextid=ZbWKwL">
-                        <div class="flex md:justify-end justify-center items-center rounded-lg px-10">
-                            <div
-                                class="flex items-center hover:bg-blue-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
-                                <i class="fab fa-facebook rounded p-4 fa-10x"></i>
-                                <p class="text-lg">Johana Marci</p>
-                            </div>
-                        </div>
+                    <!-- Criss Marci -->
+                    <a href="https://www.facebook.com/profile.php?id=100053791038783&mibextid=JRoKGi" 
+                       class="border-neon-blue box-shadow-neon-blue rounded-lg p-4 bg-black bg-opacity-60 zoom-button flex items-center gap-4">
+                        <i class="fab fa-facebook text-4xl color-blue"></i>
+                        <span class="text-white-neon text-lg">Criss Marci</span>
+                    </a>
+                    <a href="https://wa.me/message/ATTICVC7ADOYK1" 
+                       class="border-neon-green box-shadow-neon-green rounded-lg p-4 bg-black bg-opacity-60 zoom-button flex items-center gap-4">
+                        <i class="fab fa-whatsapp text-4xl color-green"></i>
+                        <span class="text-white-neon text-lg">Criss Marci</span>
                     </a>
 
-                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://wa.me/qr/HABYSTIDJUXIB1">
-                        <div class="flex md:justify-start justify-center items-center rounded-lg px-10">
-                            <div
-                                class="flex items-center hover:bg-green-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
-                                <i class="fab fa-whatsapp rounded p-4 fa-10x"></i>
-                                <p class="text-lg">Johana Marci</p>
-                            </div>
-                        </div>
+                    <!-- Angel Marci -->
+                    <a href="https://www.facebook.com/profile.php?id=100018101074191&mibextid=ZbWKwL" 
+                       class="border-neon-blue box-shadow-neon-blue rounded-lg p-4 bg-black bg-opacity-60 zoom-button flex items-center gap-4">
+                        <i class="fab fa-facebook text-4xl color-blue"></i>
+                        <span class="text-white-neon text-lg">Angel Marci</span>
+                    </a>
+                    <a href="https://wa.me/message/KYOD7M3EXYOMG1" 
+                       class="border-neon-green box-shadow-neon-green rounded-lg p-4 bg-black bg-opacity-60 zoom-button flex items-center gap-4">
+                        <i class="fab fa-whatsapp text-4xl color-green"></i>
+                        <span class="text-white-neon text-lg">Angel Marci</span>
                     </a>
 
-                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://www.facebook.com/share/1AozV1ivFs/">
-                        <div class="flex md:justify-end justify-center items-center rounded-lg px-10">
-                            <div
-                                class="flex items-center hover:bg-blue-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
-                                <i class="fab fa-facebook rounded p-4 fa-10x"></i>
-                                <p class="text-xl">Paola Marci</p>
-                            </div>
-                        </div>
+                    <!-- Alejandra Marci -->
+                    <a href="https://www.facebook.com/profile.php?id=100010421532377&mibextid=ZbWKwL" 
+                       class="border-neon-blue box-shadow-neon-blue rounded-lg p-4 bg-black bg-opacity-60 zoom-button flex items-center gap-4">
+                        <i class="fab fa-facebook text-4xl color-blue"></i>
+                        <span class="text-white-neon">Alejandra Marci</span>
+                    </a>
+                    <a href="https://wa.me/message/C4K2RIOC2WY7L1" 
+                       class="border-neon-green box-shadow-neon-green rounded-lg p-4 bg-black bg-opacity-60 zoom-button flex items-center gap-4">
+                        <i class="fab fa-whatsapp text-4xl color-green"></i>
+                        <span class="text-white-neon">Alejandra Marci</span>
                     </a>
 
-                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://wa.me/message/NP4ZDJIR5GZTF1">
-                        <div class="flex md:justify-start justify-center items-center rounded-lg px-10">
-                            <div
-                                class="flex items-center hover:bg-green-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
-                                <i class="fab fa-whatsapp rounded p-4 fa-10x"></i>
-                                <p class="text-xl">Paola Marci</p>
-                            </div>
-                        </div>
+                    <!-- Elizabeth Marci -->
+                    <a href="https://www.facebook.com/share/151n1F7V86/" 
+                       class="border-neon-blue box-shadow-neon-blue rounded-lg p-4 bg-black bg-opacity-60 zoom-button flex items-center gap-4">
+                        <i class="fab fa-facebook text-4xl color-blue"></i>
+                        <span class="text-white-neon">Elizabeth Marci</span>
+                    </a>
+                    <a href="https://wa.me/qr/UORU6W2XKJMSH1" 
+                       class="border-neon-green box-shadow-neon-green rounded-lg p-4 bg-black bg-opacity-60 zoom-button flex items-center gap-4">
+                        <i class="fab fa-whatsapp text-4xl color-green"></i>
+                        <span class="text-white-neon">Elizabeth Marci</span>
                     </a>
 
-                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2"
-                        href="https://www.facebook.com/profile.php?id=100053791038783&mibextid=JRoKGi">
-                        <div class="flex md:justify-end justify-center items-center rounded-lg px-10">
-                            <div
-                                class="flex items-center hover:bg-blue-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
-                                <i class="fab fa-facebook rounded p-4 fa-10x"></i>
-                                <p class="text-xl">Criss Marci</p>
-                            </div>
-                        </div>
+                    <!-- Lizza Marci -->
+                    <a href="https://www.facebook.com/luis.marci.9?mibextid=ZbWKwL" 
+                       class="border-neon-blue box-shadow-neon-blue rounded-lg p-4 bg-black bg-opacity-60 zoom-button flex items-center gap-4">
+                        <i class="fab fa-facebook text-4xl color-blue"></i>
+                        <span class="text-white-neon text-lg">Lizza Marci</span>
                     </a>
-
-                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://wa.me/message/ATTICVC7ADOYK1">
-                        <div class="flex md:justify-start justify-center items-center rounded-lg px-10">
-                            <div
-                                class="flex items-center hover:bg-green-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
-                                <i class="fab fa-whatsapp rounded p-4 fa-10x"></i>
-                                <p class="text-xl">Criss Marci</p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2"
-                        href="https://www.facebook.com/profile.php?id=100018101074191&mibextid=ZbWKwL">
-                        <div class="flex md:justify-end justify-center items-center rounded-lg px-10">
-                            <div
-                                class="flex items-center hover:bg-blue-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
-                                <i class="fab fa-facebook rounded p-4 fa-10x"></i>
-                                <p class="text-xl">Angel Marci</p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://wa.me/message/KYOD7M3EXYOMG1">
-                        <div class="flex md:justify-start justify-center items-center rounded-lg px-10">
-                            <div
-                                class="flex items-center hover:bg-green-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
-                                <i class="fab fa-whatsapp rounded p-4 fa-10x"></i>
-                                <p class="text-xl">Angel Marci</p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2"
-                        href="https://www.facebook.com/profile.php?id=100010421532377&mibextid=ZbWKwL">
-                        <div class="flex md:justify-end justify-center items-center rounded-lg px-10">
-                            <div
-                                class="flex items-center hover:bg-blue-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
-                                <i class="fab fa-facebook rounded p-4 fa-10x"></i>
-                                <p class="text-sm">Alejandra Marci</p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://wa.me/message/C4K2RIOC2WY7L1">
-                        <div class="flex md:justify-start justify-center items-center rounded-lg px-10">
-                            <div
-                                class="flex items-center hover:bg-green-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
-                                <i class="fab fa-whatsapp rounded p-4 fa-10x"></i>
-                                <p class="text-sm">Alejandra Marci</p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://www.facebook.com/share/151n1F7V86/">
-                        <div class="flex md:justify-end justify-center items-center rounded-lg px-10">
-                            <div
-                                class="flex items-center hover:bg-blue-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
-                                <i class="fab fa-facebook rounded p-4 fa-10x"></i>
-                                <p class="text-sm">Elizabeth Marci</p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://wa.me/qr/UORU6W2XKJMSH1">
-                        <div class="flex md:justify-start justify-center items-center rounded-lg px-10">
-                            <div
-                                class="flex items-center hover:bg-green-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
-                                <i class="fab fa-whatsapp rounded p-4 fa-10x"></i>
-                                <p class="text-sm">Elizabeth Marci</p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2"
-                        href="https://www.facebook.com/luis.marci.9?mibextid=ZbWKwL">
-                        <div class="flex md:justify-end justify-center items-center rounded-lg px-10">
-                            <div
-                                class="flex items-center hover:bg-blue-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
-                                <i class="fab fa-facebook rounded p-4 fa-10x"></i>
-                                <p class="text-xl">Lizza Marci</p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a class="w-full md:w-1/2 md:px-5 px-2 py-2" href="https://wa.me/message/7PCXD7ZPSHOEN1">
-                        <div class="flex md:justify-start justify-center items-center rounded-lg px-10">
-                            <div
-                                class="flex items-center hover:bg-green-400 hover:text-white rounded-lg p-4 mx-5 transition-colors duration-300 px-10">
-                                <i class="fab fa-whatsapp rounded p-4 fa-10x"></i>
-                                <p class="text-xl">Lizza Marci</p>
-                            </div>
-                        </div>
+                    <a href="https://wa.me/message/7PCXD7ZPSHOEN1" 
+                       class="border-neon-green box-shadow-neon-green rounded-lg p-4 bg-black bg-opacity-60 zoom-button flex items-center gap-4">
+                        <i class="fab fa-whatsapp text-4xl color-green"></i>
+                        <span class="text-white-neon text-lg">Lizza Marci</span>
                     </a>
                 </div>
 
-                <div class="w-full mx-auto p-10 px-24 bg-black text-gray-300  bg-opacity-50 shadow-md rounded-3xl ">
-                    <h2 class="text-2xl font-bold mb-8 uppercase">Nosotros te contáctamos</h2>
-                    <form action="{{ route('Contactar') }}" method="POST">
+                <!-- Formulario de Contacto -->
+                <div class="w-full max-w-4xl mx-auto p-8 md:p-10 border-neon-magenta box-shadow-neon-magenta bg-black text-gray-300 bg-opacity-70 shadow-md rounded-3xl my-10">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8 uppercase text-center">
+                        <span class="text-color-neon">
+                            Nosotros te contáctamos
+                        </span>
+                    </h2>
+                    <form action="{{ route('Contactar') }}" method="POST" class="space-y-6">
                         @csrf
-                        <div class="mb-4">
-                            <label for="name" class="block text-gray-400">Nombre</label>
-                            <input type="text" id="name" name="name"
-                                class="w-full px-3 py-2 border border-opacity-5 rounded-md bg-white bg-opacity-25"
-                                value="{{ old('name') }}">
+                        <div class="mb-6">
+                            <label for="name" class="block text-white mb-2 font-medium">Nombre</label>
+                            <input type="text" 
+                                   id="name" 
+                                   name="name"
+                                   class=" "
+                                   value="{{ old('name') }}"
+                                   placeholder="Tu nombre completo">
                         </div>
-                        <div class="mb-4">
-                            <label for="email" class="block text-gray-400">Correo Electrónico</label>
-                            <input type="email" id="email" name="email"
-                                class="w-full px-3 py-2 border border-opacity-5 rounded-md bg-white bg-opacity-25"
-                                value="{{ old('email') }}">
-
+                        <div class="mb-6">
+                            <label for="email" class="block text-white mb-2 font-medium">Correo Electrónico</label>
+                            <input type="email" 
+                                   id="email" 
+                                   name="email"
+                                   class=" "
+                                   value="{{ old('email') }}"
+                                   placeholder="tu@email.com">
                         </div>
-                        <div class="mb-4">
-                            <label for="phone" class="block text-gray-400">Número Celular</label>
-                            <input type="phone" id="phone" name="phone"
-                                class="w-full px-3 py-2 border border-opacity-5 rounded-md bg-white bg-opacity-25"
-                                value="{{ old('phone') }}">
-
+                        <div class="mb-6">
+                            <label for="phone" class="block text-white mb-2 font-medium">Número Celular</label>
+                            <input type="tel" 
+                                   id="phone" 
+                                   name="phone"
+                                   class=" "
+                                   value="{{ old('phone') }}"
+                                   placeholder="+52 123 456 7890">
                         </div>
-                        <div class="mb-4">
-                            <label for="subject" class="block text-gray-400">Asunto</label>
-                            <input type="text" id="subject" name="subject"
-                                class="w-full px-3 py-2 border border-opacity-5 rounded-md bg-white bg-opacity-25"
-                                value="{{ old('subject') }}">
-
+                        <div class="mb-6">
+                            <label for="subject" class="block text-white mb-2 font-medium">Asunto</label>
+                            <input type="text" 
+                                   id="subject" 
+                                   name="subject"
+                                   class=" "
+                                   value="{{ old('subject') }}"
+                                   placeholder="Motivo de tu consulta">
                         </div>
-                        <div class="mb-4">
-                            <label for="message" class="block text-gray-400">Mensaje</label>
-                            <textarea id="message" name="message" rows="4"
-                                class="w-full px-3 py-2 border border-opacity-5 rounded-md bg-white bg-opacity-25"></textarea>
-
+                        <div class="mb-6">
+                            <label for="message" class="block text-white mb-2 font-medium">Mensaje</label>
+                            <textarea id="message" 
+                                      name="message" 
+                                      rows="5"
+                                      class="  resize-vertical"
+                                      placeholder="Escribe tu mensaje aquí...">{{ old('message') }}</textarea>
                         </div>
-                        <div class="w-full flex flex-col items-center pt-2">
+                        <div class="w-full flex flex-col items-center pt-4">
                             <button type="submit"
-                                class=" bg-gray-900 text-white py-2 px-4 rounded-md hover:bg-blue-600 text-xl">
-                                Enviar
+                                    class="botones-neon-green text-xl px-8 py-3 rounded-full font-bold uppercase transition-all duration-300">
+                                Enviar Mensaje
                             </button>
                         </div>
                     </form>

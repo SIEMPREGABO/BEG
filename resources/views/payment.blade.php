@@ -1,19 +1,19 @@
 @section('name', 'Pago')
 
 <x-app-layout>
-    <div class="md:py-24 py-32 ">
+    <div class="py-10 ">
         <div class="flex justify-center bg-black bg-opacity-50 rounded-lg">
             <div class=" max-w-2xl w-full antialiased   flex flex-col justify-center items-center py-10">
                 <div class="w-full p-6 my-10 md:my-0">
-                    <h1 class="text-2xl  font-bold mb-6">Proceso de pago</h1>
+                    <h1 class="h4-neon my-5">Proceso de pago</h1>
 
 
 
 
                     <dl class="flex items-center justify-between gap-4">
-                        <dt class="text-gray-500 dark:text-gray-400">Descuentos</dt>
+                        <dt class="text-color-neon">Descuentos</dt>
                         <dd class="text-base font-medium text-green-500">
-                            <p id="descuento" name="descuento">${{ number_format($descuentoTotal,2) }}</p>
+                            <p id="descuento" name="descuento">${{ number_format($descuentoTotal, 2) }}</p>
                         </dd>
                     </dl>
 
@@ -22,8 +22,9 @@
                     </dl>
 
                     <dl class="flex items-center justify-between gap-4">
-                        <dt class="text-gray-500 dark:text-gray-400">Subtotal</dt>
-                        <dd class="text-base font-medium text-gray-500 dark:text-white">${{number_format($subtotal,2) }}</dd>
+                        <dt class="text-color-neon">Subtotal</dt>
+                        <dd class="text-base font-medium text-gray-500 dark:text-white">
+                            ${{ number_format($subtotal, 2) }}</dd>
                     </dl>
 
                     <dl
@@ -31,12 +32,12 @@
                     </dl>
 
                     <dl class="flex items-center justify-between gap-4">
-                        <dt class="text-gray-500 dark:text-gray-400">Envío</dt>
+                        <dt class="text-color-neon">Envío</dt>
                         <dd class="text-base font-medium text-gray-500 dark:text-white">
                             @if ($envio === 0)
-                            Tu envío requiere atención especial. Te contactaremos para coordinarlo.
+                                Tu envío requiere atención especial. Te contactaremos para coordinarlo.
                             @else
-                                ${{ number_format($envio, 2)  }}
+                                ${{ number_format($envio, 2) }}
                             @endif
                         </dd>
                     </dl>
@@ -46,8 +47,9 @@
                     </dl>
 
                     <dl class="flex items-center justify-between gap-4">
-                        <dt class="text-gray-500 dark:text-gray-400">Total</dt>
-                        <dd class="text-base font-medium text-gray-500 dark:text-white">${{ number_format($total,2) }}</dd>
+                        <dt class="text-color-neon">Total</dt>
+                        <dd class="text-base font-medium text-gray-500 dark:text-white">${{ number_format($total, 2) }}
+                        </dd>
                     </dl>
                     <dl
                         class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
@@ -146,7 +148,15 @@
                     },
                 },
                 customization: {
-                    visual: {},
+                    visual: {
+                        style: {
+                            theme: "dark",
+                            textPrimaryColor: "#fff",
+                            formBackgroundColor: "#000",
+                            baseColor: "#00ff9d",
+                            buttonTextColor: "#fff"
+                        },
+                    },
                     paymentMethods: {
                         maxInstallments: 1,
                     }
@@ -191,5 +201,90 @@
         };
         renderCardPaymentBrick(bricksBuilder);
     </script>
-    
+
+    <script>
+          const mp = new MercadoPago('YOUR_PUBLIC_KEY', {
+            locale: 'es-MX'
+          });
+          const bricksBuilder = mp.bricks();
+            const renderPaymentBrick = async (bricksBuilder) => {
+              const settings = {
+                initialization: {
+                  /*
+                  "amount" es el monto total a pagar por todos los medios de pago con excepción de la Cuenta de Mercado Pago y Cuotas sin tarjeta de crédito, las cuales tienen su valor de procesamiento determinado en el backend a través del "preferenceId"
+                  }
+                  */
+                  amount: 10000,
+                  preferenceId: "<PREFERENCE_ID>",
+                  payer: {
+                    firstName: "",
+                    lastName: "",
+                    email: "",
+                  },
+                },
+                customization: {
+                  visual: {
+                    style: {
+                      theme: "dark",
+										  textPrimaryColor: "#fff",
+										  formBackgroundColor: "#000",
+										  baseColor: "#00ff9d",
+										  buttonTextColor: "#fff"
+                   },
+                  },
+                  paymentMethods: {
+                    creditCard: "all",
+										debitCard: "all",
+										ticket: "all",
+										bankTransfer: "all",
+										onboarding_credits: "all",
+										wallet_purchase: "all",
+										: "all",
+                    maxInstallments: 1
+                  },
+                },
+                callbacks: {
+                  onReady: () => {
+                    /*
+                     Callback llamado cuando el Brick está listo.
+                     Aquí puede ocultar cargamentos de su sitio, por ejemplo.
+                    */
+                  },
+                  onSubmit: ({ selectedPaymentMethod, formData }) => {
+                    // callback llamado al hacer clic en el botón de envío de datos
+                    return new Promise((resolve, reject) => {
+                      fetch("/process_payment", {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(formData),
+                      })
+                        .then((response) => response.json())
+                        .then((response) => {
+                          // recibir el resultado del pago
+                          resolve();
+                        })
+                        .catch((error) => {
+                          // manejar la respuesta de error al intentar crear el pago
+                          reject();
+                        });
+                    });
+                  },
+                  onError: (error) => {
+                    // callback llamado para todos los casos de error de Brick
+                    console.error(error);
+                  },
+                },
+              };
+              window.paymentBrickController = await bricksBuilder.create(
+                "payment",
+                "paymentBrick_container",
+                settings
+              );
+            };
+            renderPaymentBrick(bricksBuilder);
+          </script>
+
+
 </x-app-layout>

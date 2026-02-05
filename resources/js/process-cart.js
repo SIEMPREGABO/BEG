@@ -27,12 +27,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const num_ext = document.getElementById('num_ext');
    
     if (
+        municipio && estado && cp && colonia && calle && num_ext && (
         municipio.value !== "" || 
         estado.value !== "" || 
         cp.value !== '' || 
         colonia.value !== '' || 
         calle.value !== '' || 
-        num_ext.value !== ''
+        num_ext.value !== '')
     ) {
         cambiarSelectEnvio();
         radios.forEach(radio => {

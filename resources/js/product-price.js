@@ -26,7 +26,10 @@ function getPrice() {
     
     for (let i = 0; i < array.length; i++) {
         if (array[i] === '0') {  // Comprobar si el valor no es null
-            document.getElementById('price').innerText = `$ - `;
+            document.getElementById('price').innerHTML = ``;
+            document.getElementById('price').innerHTML = `<p class="text-sm md:text-base">
+                                        Selecciona las opciones para ver el precio
+                                    </p> `;
             document.getElementById('precio').value = '';
             document.getElementById('submitButton').setAttribute('disabled','disabled');
             return;
@@ -42,10 +45,11 @@ function getPrice() {
         .then(data => {
             //console.log(data.producto);
             if (data.price === null) {
-                document.getElementById('price').innerText = `$ - `;
+                document.getElementById('price').innerHTML = ``;
                 document.getElementById('submitButton').setAttribute('disabled','disabled');
             } else {
-                document.getElementById('price').innerText = `$${data.producto.precio}`;
+                document.getElementById('price').innerHTML = ``;
+                document.getElementById('price').innerHTML = `<p id="price" name="price" class="mb-4 text-xl md:text-3xl">$${data.producto.precio}</p>`;
                 document.getElementById('precio').value = `${data.producto.precio}`;
                 document.getElementById('ancho').value = `${data.producto.ancho}`;
                 document.getElementById('alto').value = `${data.producto.alto}`;

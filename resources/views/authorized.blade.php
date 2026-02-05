@@ -19,7 +19,7 @@
                         hideStatusDetails: true,
                         hideTransactionDate: true,
                         style: {
-                            theme: 'default', // 'default' | 'dark' | 'bootstrap' | 'flat'
+                            theme: 'dark', // 'default' | 'dark' | 'bootstrap' | 'flat'
                         }
                     },
                     backUrls: {
