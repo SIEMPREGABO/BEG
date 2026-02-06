@@ -1,7 +1,7 @@
 @section('name', 'Catalogo')
 
 <x-app-layout>
-    <x-alert-messages />
+    {{-- <x-alert-messages /> --}}
 
     <body>
 
