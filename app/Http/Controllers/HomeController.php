@@ -61,32 +61,36 @@ class HomeController extends Controller
         return view('store', compact('categoriasConProductos', 'categorias'));
     }
 
+    
+
     public function categoria($categoria, Request $request)
     {
 
         $nombre = $request->nombre;
-        $precios = $request->input('precios', []);
+        $precios = $request->input('precios');
         $variante = $request->variante;
         // Determinar rango de precios
         $minPrecio = null;
         $maxPrecio = null;
-        foreach ($precios as $rango) {
-            if ($rango === '50000+') {
+        if ($precios) {
+            if ($precios === '50000+') {
                 $minPrecio = max($minPrecio ?? 0, 50000);
             } else {
-                [$min, $max] = explode('-', $rango);
+                [$min, $max] = explode('-', $precios);
                 $minPrecio = $minPrecio === null ? $min : min($minPrecio, $min);
                 $maxPrecio = $maxPrecio === null ? $max : max($maxPrecio, $max);
             }
         }
 
         $category = Category::where('slug', $categoria)->firstOrFail();
+        $categorias = Category::all();
+        //dd($category);
         $products = $category->products()
             ->nombre($nombre)
             ->precio($minPrecio, $maxPrecio)
             ->variante($variante)
-            ->paginate(12);
-        return view('categoryStore', compact('category', 'products'));
+            ->get();
+        return view('categoryStore', compact('category', 'products', 'categorias'));
     }
 
     public function show($slug)
