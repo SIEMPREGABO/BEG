@@ -199,9 +199,9 @@
                 <button type="button" id="user-menu-button-tablet"
                     class="fa-solid fa-angle-down p-1 border-none"></button>
 
-                <div id="user-menu-tablet" style="top: 18%; margin-top:1rem;"
+                <div id="user-menu-tablet" style="top: 18%; margin-top:1rem;background-color: #000;"
                     class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md border-neon-green  py-1 shadow-lg  hidden"
-                    style="background-color: #000"
+                    
                     role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button-tablet"
                     tabindex="-1">
                     @if (Auth::user()->isAdmin === 0)

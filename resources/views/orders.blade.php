@@ -106,7 +106,7 @@
                         </svg>
                         <h3 class="h4-neon mb-4">No tienes pedidos aún</h3>
                         <p class="text-gray-400 mb-6">Comienza a explorar nuestros productos</p>
-                        <a href="{{ route('Catalogo') }}" class="botones-neon-green zoom-button inline-flex items-center gap-2">
+                        <a href="{{ route('Producto', 'Ligas') }}" class="botones-neon-green zoom-button inline-flex items-center gap-2">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                             </svg>
